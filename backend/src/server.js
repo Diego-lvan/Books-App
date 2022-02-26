@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
+const categoryRouter = require("./routes/category");
 const path = require("path");
 const { conn } = require("./config/conn");
 const session = require("express-session");
@@ -41,9 +42,8 @@ app.use(passport.session());
 
 app.use(userRouter);
 app.use(authRouter);
-app.get("/", (req, res) => {
-  res.send("Page");
-});
+app.use(categoryRouter);
+
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Listening in port ${process.env.PORT || 5000}`);
 });
