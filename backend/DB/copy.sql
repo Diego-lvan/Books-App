@@ -3,7 +3,7 @@ USE uniread;
 
 CREATE TABLE user(
     user_id INT PRIMARY KEY AUTO_INCREMENT,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(80) NOT NULL,
     username VARCHAR(20) NOT NULL,
     img_path VARCHAR(40) NOT NULL
