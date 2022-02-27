@@ -1,7 +1,8 @@
 const bookRouter = require("express").Router();
 const { addBook } = require("../controllers/book");
 const upload = require("../middlewares/uploadFile");
-//add
+
+//post cover book
 bookRouter.post("/book/add", upload.single("bookCover"), addBook);
 
 //remove

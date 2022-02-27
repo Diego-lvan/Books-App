@@ -2,11 +2,9 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, done) => {
-    console.log(file);
     done(null, "src/public/books");
   },
   filename: (req, file, done) => {
-    console.log(file + "here");
     done(null, `${Date.now()}-${file.originalname}`);
   },
 });
