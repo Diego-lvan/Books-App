@@ -4,6 +4,7 @@ const app = express();
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
 const categoryRouter = require("./routes/category");
+const bookRouter = require("./routes/book");
 const path = require("path");
 const { conn } = require("./config/conn");
 const session = require("express-session");
@@ -43,6 +44,7 @@ app.use(passport.session());
 app.use(userRouter);
 app.use(authRouter);
 app.use(categoryRouter);
+app.use(bookRouter);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Listening in port ${process.env.PORT || 5000}`);
