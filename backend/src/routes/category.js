@@ -3,7 +3,7 @@ const { addCategory } = require("../controllers/category");
 // add new category
 categoryRouter.post("/category/add", /*Verify is an admin*/ [addCategory]);
 
-// get all categories
+// get all  categories
 
 //update category
 

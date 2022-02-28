@@ -27,4 +27,18 @@ const addBook = async (req, res, next) => {
   }
 };
 
-module.exports = { addBook };
+const getAllBooks = async (req, res, next) => {
+  const data = await query("SELECT * FROM book");
+  if (data.length == 0) return res.json({ success: false, msg: "Not found" });
+  res.json(data);
+};
+
+const getByISBN = async (req, res, next) => {
+  const { isbn } = req.params;
+  const sql = "SELECT * FROM book WHERE isbn = ?";
+  const data = await query(sql, [isbn]);
+  if (data.length == 0) return res.json({ success: false, msg: "Not found" });
+  res.json({ book: data, success: true });
+};
+
+module.exports = { addBook, getAllBooks, getByISBN };
