@@ -61,3 +61,7 @@ CREATE TABLE replie(
     likes INTEGER(10) DEFAULT  0,
     FOREIGN KEY (comment_id) REFERENCES comment(comment_id)
 );
+
+
+
+

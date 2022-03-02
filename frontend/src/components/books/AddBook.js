@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import URL from "../../config";
 axios.defaults.withCredentials = true;
-const URL = "http://localhost:5000/book/add";
+
 const config = { headers: { "Content-Type": "multipart/form-data" } };
 
 const AddBook = () => {
@@ -29,7 +30,7 @@ const AddBook = () => {
     formData.append("categoryID", book.category);
 
     try {
-      const res = await axios.post(URL, formData, config);
+      const res = await axios.post(`${URL}book/add`, formData, config);
       console.log(res);
     } catch (error) {
       console.log(error);

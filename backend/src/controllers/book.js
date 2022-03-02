@@ -1,6 +1,7 @@
 const { query } = require("../config/conn");
 const { verifyLength, isNotEmpty } = require("../helpers/checkFields");
 const addBook = async (req, res, next) => {
+  console.log(req.body);
   const { isbn, title, noPages, author, synopsis, categoryID } = req.body;
   const { file } = req;
   const fields = [
@@ -28,9 +29,18 @@ const addBook = async (req, res, next) => {
 };
 
 const getAllBooks = async (req, res, next) => {
-  const data = await query("SELECT * FROM book");
-  if (data.length == 0) return res.json({ success: false, msg: "Not found" });
-  res.json(data);
+  const categories = await query("SELECT * FROM category");
+  let allBooks = {};
+  let count = 0;
+  for (const category of categories) {
+    const categoryID = category.category_id;
+    const sql = `select book.isbn, book.title, book.author, book.filename, category.category 
+                   from book 
+              inner join category on category.category_id = book.category_id && book.category_id = ?`;
+    let books = await query(sql, [categoryID]);
+    allBooks[category.category] = books;
+  }
+  res.json({ books: allBooks, success: true });
 };
 
 const getByISBN = async (req, res, next) => {

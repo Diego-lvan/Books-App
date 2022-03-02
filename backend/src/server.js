@@ -12,13 +12,23 @@ const MySQLStore = require("express-mysql-session")(session);
 const passport = require("passport");
 const sessionStore = new MySQLStore({}, conn);
 const cors = require("cors");
+
+app.use(
+  cors({
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
     secret: "secret",
     resave: false,
-    saveUninitialized: true,
+    secure: true,
+    saveUninitialized: false,
     store: sessionStore,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
@@ -26,13 +36,14 @@ app.use(
   })
 );
 
-app.use(
-  cors({
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
-    origin: ["http://localhost:3000"],
-    credentials: true,
-  })
-);
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-Width, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 const config = { extensions: ["png", "jpg", "svg", "jpeg"] };
 app.use(express.static(path.join(__dirname, "public"), config));

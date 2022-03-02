@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Login from "./components/auth/Login";
 import AddBook from "./components/books/AddBook";
+import Navbar from "./components/Navbar/Navbar";
+import { createContext } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/home/Home";
+export const AppContext = createContext();
 const App = () => {
+  const [logged, setLogged] = useState(false);
+  const [loading, setLoading] = useState(true);
   return (
-    <div>
-      <Login />
-      <AddBook />
-    </div>
+    <AppContext.Provider value={{ logged, setLogged, loading, setLoading }}>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/book/add" element={<AddBook />} />
+        </Routes>
+        {/* <AddBook /> */}
+      </BrowserRouter>
+    </AppContext.Provider>
   );
 };
 

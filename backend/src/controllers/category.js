@@ -12,5 +12,10 @@ const addCategory = async (req, res, next) => {
     res.json({ sucess: false });
   }
 };
+// const getCategories = async () => {
+//   try {
+//     const res = await query("SELECT * FROM category");
+//   } catch (error) {}
+// };
 
 module.exports = { addCategory };
