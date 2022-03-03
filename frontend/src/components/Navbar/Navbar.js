@@ -9,7 +9,7 @@ const NavbarComponent = () => {
   const { pathname } = useLocation() || "/";
   if (pathname === "/" || pathname === "/signup") {
     return (
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" fixed="top">
         <Container>
           <Navbar.Brand as={Link} to="/">
             Uniread

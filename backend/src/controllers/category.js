@@ -12,10 +12,14 @@ const addCategory = async (req, res, next) => {
     res.json({ sucess: false });
   }
 };
-// const getCategories = async () => {
-//   try {
-//     const res = await query("SELECT * FROM category");
-//   } catch (error) {}
-// };
 
-module.exports = { addCategory };
+const getCategories = async (req, res) => {
+  try {
+    const categories = await query("SELECT * FROM category");
+    res.json({ categories, success: true });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { addCategory, getCategories };

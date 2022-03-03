@@ -1,7 +1,6 @@
 const { query } = require("../config/conn");
 const { verifyLength, isNotEmpty } = require("../helpers/checkFields");
 const addBook = async (req, res, next) => {
-  console.log(req.body);
   const { isbn, title, noPages, author, synopsis, categoryID } = req.body;
   const { file } = req;
   const fields = [
@@ -13,10 +12,6 @@ const addBook = async (req, res, next) => {
     synopsis,
     parseInt(categoryID),
   ];
-  // if (!fields.every(isNotEmpty)) {
-  // return res.json({ success: false, msg: "Empty fields" });
-  // }
-  // if (!fields.every(verifyLength)) return res.json({ success: false });
 
   try {
     const sql =
@@ -29,18 +24,16 @@ const addBook = async (req, res, next) => {
 };
 
 const getAllBooks = async (req, res, next) => {
-  const categories = await query("SELECT * FROM category");
-  let allBooks = {};
-  let count = 0;
-  for (const category of categories) {
-    const categoryID = category.category_id;
-    const sql = `select book.isbn, book.title, book.author, book.filename, category.category 
-                   from book 
-              inner join category on category.category_id = book.category_id && book.category_id = ?`;
-    let books = await query(sql, [categoryID]);
-    allBooks[category.category] = books;
+  try {
+    const sql = `SELECT book.isbn, book.title, book.filename, book.author, category.category
+                  FROM book 
+                INNER JOIN category
+                  ON category.category_id = book.category_id ORDER BY category.category ASC`;
+    const books = await query(sql);
+    res.json({ books, success: true });
+  } catch (error) {
+    console.log(error);
   }
-  res.json({ books: allBooks, success: true });
 };
 
 const getByISBN = async (req, res, next) => {

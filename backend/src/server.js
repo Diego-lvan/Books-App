@@ -16,7 +16,7 @@ const cors = require("cors");
 app.use(
   cors({
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3001",
     credentials: true,
   })
 );
@@ -28,7 +28,7 @@ app.use(
     secret: "secret",
     resave: false,
     secure: true,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: sessionStore,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,

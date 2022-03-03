@@ -31,7 +31,7 @@ const AddBook = () => {
 
     try {
       const res = await axios.post(`${URL}book/add`, formData, config);
-      console.log(res);
+      //check if res.success
     } catch (error) {
       console.log(error);
     }
