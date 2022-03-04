@@ -24,5 +24,6 @@ passport.deserializeUser(async (username, done) => {
   // grabs the email from session.passport.user and adds it to req.user
   const sql = "SELECT * FROM user WHERE email=? ";
   const user = await query(sql, [username]);
-  done(null, user[0].email);
+  const { email, user_id } = user[0];
+  done(null, { email, user_id });
 });

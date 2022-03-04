@@ -41,7 +41,7 @@ const getByISBN = async (req, res, next) => {
   const sql = "SELECT * FROM book WHERE isbn = ?";
   const data = await query(sql, [isbn]);
   if (data.length == 0) return res.json({ success: false, msg: "Not found" });
-  res.json({ book: data, success: true });
+  res.json({ book: data[0], success: true });
 };
 
 module.exports = { addBook, getAllBooks, getByISBN };

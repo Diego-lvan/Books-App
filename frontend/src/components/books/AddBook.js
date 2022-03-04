@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import URL from "../../config";
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { AppContext } from "../../App";
 axios.defaults.withCredentials = true;
 
 const config = { headers: { "Content-Type": "multipart/form-data" } };
 
 const AddBook = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const { loading, setLoading } = useContext(AppContext);
   const [book, setBook] = useState({
     isbn: "",
     title: "",
@@ -15,6 +20,16 @@ const AddBook = () => {
     synopsis: "",
     category: "",
   });
+  const getCategories = async () => {
+    setLoading(true);
+    const res = await axios.get(`${URL}category`);
+    console.log(res.data.categories);
+    setCategories(res.data.categories);
+    setLoading(false);
+  };
+  useEffect(() => {
+    getCategories();
+  }, []);
   const handleFile = (e) => {
     setSelectedFile(e.target.files[0]);
   };
@@ -44,56 +59,91 @@ const AddBook = () => {
     setBook({ ...book, [name]: value });
   };
 
+  if (loading) return <></>;
+
   return (
-    <div>
-      <form encType="multipart/form-data" onSubmit={handleSubmit}>
-        <input type="file" name="book-cover" onChange={handleFile} />
+    <Container style={{ margin: "90px auto 0px auto" }}>
+      <h3>Add book</h3>
+      <Form
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+        className="row row-cols-auto"
+      >
+        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+          <Form.Control
+            type="text"
+            placeholder="ISBN"
+            value={book.isbn}
+            onChange={handleChange}
+            name="isbn"
+          />
+        </Form.Group>
 
-        <input
-          type="text"
-          name="isbn"
-          placeholder="ISBN"
-          onChange={handleChange}
-          value={book.isbn}
-        />
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          onChange={handleChange}
-          value={book.title}
-        />
-        <input
-          type="text"
-          name="noPages"
-          placeholder="Pages"
-          onChange={handleChange}
-          value={book.noPages}
-        />
-        <input
-          type="text"
-          name="author"
-          placeholder="Author"
-          onChange={handleChange}
-          value={book.author}
-        />
-        <input
-          type="text"
-          name="synopsis"
-          placeholder="Synopsis"
-          onChange={handleChange}
-          value={book.synopsis}
-        />
-        <input
-          type="text"
-          name="category"
-          placeholder="Category"
-          onChange={handleChange}
-        />
+        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+          <Form.Control
+            type="text"
+            placeholder="Title"
+            value={book.title}
+            onChange={handleChange}
+            name="title"
+          />
+        </Form.Group>
 
-        <input type="submit" value={"Post file"} />
-      </form>
-    </div>
+        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+          <Form.Control
+            type="text"
+            placeholder="Author"
+            value={book.author}
+            onChange={handleChange}
+            name="author"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+          <Form.Control
+            type="text"
+            placeholder="No. Pages"
+            value={book.noPages}
+            onChange={handleChange}
+            name="noPages"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+          <Form.Select
+            type="text"
+            placeholder="Category"
+            value={book.category}
+            onChange={handleChange}
+            name="category"
+          >
+            {categories.map(({ category, category_id }) => (
+              <option value={category_id}>{category}</option>
+            ))}
+          </Form.Select>
+        </Form.Group>
+        <Form.Group>
+          <Form.Control type="file" onChange={handleFile} name="book-cover" />
+        </Form.Group>
+
+        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+          <Form.Control
+            as="textarea"
+            type="text"
+            placeholder="Synopsis"
+            value={book.synopsis}
+            onChange={handleChange}
+            name="synopsis"
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form.Group>
+      </Form>
+    </Container>
   );
 };
 

@@ -8,7 +8,7 @@ bookRouter.post("/book/add", upload.single("bookCover"), addBook);
 bookRouter.get("/books", getAllBooks);
 
 // get by isbn
-// bookRouter.get("/book/:isbn", getByISBN);
+bookRouter.get("/book/:isbn", getByISBN);
 
 //remove
 

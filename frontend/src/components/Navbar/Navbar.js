@@ -28,7 +28,7 @@ const NavbarComponent = () => {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" fixed="top" style={{ marginBottom: "50px" }}>
       <Container>
         <Navbar.Brand href="#home">Uniread</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
