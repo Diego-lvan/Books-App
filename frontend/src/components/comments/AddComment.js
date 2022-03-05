@@ -5,18 +5,17 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import URL from "../../config";
 import { AppContext } from "../../App";
-const AddComment = () => {
+const AddComment = ({ comments, setComments, getComments }) => {
   const [comment, setComment] = useState("");
   const { isbn } = useParams();
   const { loading, setLoading } = useContext(AppContext);
   const addComment = async () => {
     setLoading(true);
     const res = await axios.post(`${URL}comment`, { comment, isbn });
-    console.log(res);
+    await getComments(isbn, URL, setLoading);
     setLoading(false);
   };
 
-  if (loading) return <></>;
   return (
     <div>
       <div className="comment-input">
@@ -30,7 +29,7 @@ const AddComment = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Button variant="primary" type="submit" onClick={addComment}>
+          <Button variant="primary" type="button" onClick={addComment}>
             Comment
           </Button>
         </Form.Group>

@@ -7,6 +7,7 @@ import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import defaultImg from "../../assets/img/not-found.png";
 import AddComment from "../comments/AddComment";
+import Comments from "../comments/Comments";
 axios.defaults.withCredentials = true;
 const Book = () => {
   const [book, setBook] = useState();
@@ -32,19 +33,17 @@ const Book = () => {
   const updateStatus = async () => {
     if (statusSelected) {
       const res = await axios.post(`${URL}my-books`, { isbn, statusSelected });
-      console.log(res);
     }
   };
 
-  const getComments = async () => {
+  const getComments = async (isbn, URL, setLoading) => {
     setLoading(true);
     const res = await axios.get(`${URL}comment/${isbn}`);
     setComments(res.data.comments);
-    console.log(res);
     setLoading(false);
   };
   useEffect(() => {
-    getComments();
+    getComments(isbn,URL, setLoading);
   }, []);
 
   useEffect(() => {
@@ -96,7 +95,12 @@ const Book = () => {
           <span>{book.synopsis}</span>
         </div>
       </div>
-      <AddComment />
+      <AddComment
+        setComments={setComments}
+        comments={comments}
+        getComments={getComments}
+      />
+      <Comments comments={comments} />
     </div>
   );
 };
