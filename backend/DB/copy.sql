@@ -43,6 +43,16 @@ CREATE TABLE comment(
     FOREIGN KEY (isbn) REFERENCES book(isbn)
 );
 
+CREATE TABLE comments_likes (
+    comment_id INT NOT NULL,
+    user_id INT NOT NULL,
+     isbn VARCHAR(13) NOT NULL,
+    PRIMARY KEY(comment_id,user_id),
+    FOREIGN KEY (comment_id) REFERENCES comment(comment_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (isbn) REFERENCES book(isbn)
+);
+
 
 CREATE TABLE my_books(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -54,14 +64,11 @@ CREATE TABLE my_books(
     FOREIGN KEY (isbn) REFERENCES book(isbn) 
 );
 
-CREATE TABLE replie(
-    replie_id INT AUTO_INCREMENT PRIMARY KEY,
-    comment_id INT NOT NULL,
-    comment VARCHAR(200) NOT NULL,
-    likes INTEGER(10) DEFAULT  0,
-    FOREIGN KEY (comment_id) REFERENCES comment(comment_id)
-);
 
 
 
+ SELECT comment.comment_id, comment.user_id, comment.comment, comment.created_date, 
+              comment.likes, comment.amount_replies, user.username 
+              FROM comment INNER JOIN user 
+              ON user.user_id = comment.user_id AND comment.isbn = ? ORDER BY created_date DESC;
 

@@ -25,8 +25,8 @@ const BookCard = ({ isbn, filename, title, author }) => {
         src={`${URL}books/${filename}`}
         onError={(e) => (e.target.src = defaultImg)}
       ></Card.Img>
-      <Card.Title>{title}</Card.Title>
-      <Card.Subtitle>{author}</Card.Subtitle>
+      <Card.Title style={{ maxWidth: "180px" }}>{title}</Card.Title>
+      <Card.Subtitle tyle={{ maxWidth: "180px" }}>{author}</Card.Subtitle>
     </Card>
   );
 };

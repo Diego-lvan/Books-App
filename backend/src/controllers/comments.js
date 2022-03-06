@@ -15,7 +15,7 @@ const getComments = async (req, res) => {
   try {
     const { isbn } = req.params;
     const sql = `SELECT comment.comment_id, comment.user_id, comment.comment, comment.created_date, 
-              comment.likes, comment.amount_replies, user.username 
+              comment.likes, comment.amount_replies, user.username, comment.isbn 
               FROM comment INNER JOIN user 
               ON user.user_id = comment.user_id AND comment.isbn = ? ORDER BY created_date DESC;
 `;
@@ -26,4 +26,26 @@ const getComments = async (req, res) => {
   }
 };
 
-module.exports = { addComment, getComments };
+const addLike = async (req, res) => {
+  try {
+    const { commentID, userID, isbn } = req.body;
+    const sql = "INSERT INTO comments_likes (comment_id,user_id,isbn) VALUES (?,?,?)";
+    await query(sql, [commentID, userID, isbn]);
+    res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false });
+  }
+};
+
+const getCommentsLikes = async (req, res) => {
+  try {
+    const { commentID } = req.params;
+    const sql = "SELECT COUNT(comment_id) FROM comments_likes WHERE comment_id = ?";
+    const data = await query(sql, [commentID]);
+    const likes = data[0]["COUNT(comment_id)"];
+    res.json({ likes });
+  } catch (error) {}
+};
+
+module.exports = { addComment, getComments, addLike, getCommentsLikes };
