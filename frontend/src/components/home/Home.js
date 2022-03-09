@@ -10,7 +10,7 @@ const Home = () => {
   const { logged, setLogged, loading, setLoading } = useContext(AppContext);
   const [books, setBooks] = useState([]);
 
-  const fetchBooks = async (categories) => {
+  const fetchBooks = async () => {
     const res = await axios.get(`${URL}books`);
     console.log(res.data);
     setBooks(res.data.books);

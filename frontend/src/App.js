@@ -6,6 +6,7 @@ import { createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Book from "./components/books/Book";
+import MyBooks from "./pages/MyBooks";
 export const AppContext = createContext();
 const App = () => {
   const [logged, setLogged] = useState(false);
@@ -20,6 +21,7 @@ const App = () => {
           <Route exact path="/" element={<Login />} />
           <Route exact path="/admin" element={<AddBook />} />
           <Route exact path="/book/:isbn" element={<Book />} />
+          <Route exact path="/my-books/:id" element={<MyBooks />} />
         </Routes>
         {/* <AddBook /> */}
       </BrowserRouter>

@@ -42,13 +42,20 @@ const Book = () => {
     setComments(res.data.comments);
     setLoading(false);
   };
+  const fetchMyBooksList = async () => {
+    setLoading(true);
+    const res = await axios.get(`${URL}my-books/${isbn}`);
+    setStatusSelected(res.data.status_id);
+  };
+
   useEffect(() => {
-    getComments(isbn,URL, setLoading);
+    getComments(isbn, URL, setLoading);
   }, []);
 
   useEffect(() => {
     fetchBook(isbn);
     fetchStatus();
+    fetchMyBooksList();
   }, []);
 
   useEffect(() => {

@@ -63,6 +63,11 @@ app.use(statusRouter);
 app.use(myBooksRouter);
 app.use(commentsRouter);
 
+app.get("/", (req, res) => {
+  console.log(req.params);
+  res.json({ hola: req.body });
+});
+
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Listening in port ${process.env.PORT || 5000}`);
 });

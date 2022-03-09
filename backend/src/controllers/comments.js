@@ -28,7 +28,8 @@ const getComments = async (req, res) => {
 
 const addLike = async (req, res) => {
   try {
-    const { commentID, userID, isbn } = req.body;
+    const { commentID, isbn } = req.body;
+    const userID = req.user.user_id;
     const sql = "INSERT INTO comments_likes (comment_id,user_id,isbn) VALUES (?,?,?)";
     await query(sql, [commentID, userID, isbn]);
     res.json({ success: true });
@@ -41,6 +42,7 @@ const addLike = async (req, res) => {
 const getCommentsLikes = async (req, res) => {
   try {
     const { commentID } = req.params;
+    const userID = req.user.user_id;
     const sql = "SELECT COUNT(comment_id) FROM comments_likes WHERE comment_id = ?";
     const data = await query(sql, [commentID]);
     const likes = data[0]["COUNT(comment_id)"];

@@ -31,7 +31,7 @@ const Login = () => {
   if (logged) return <Navigate to="/home" />;
 
   return (
-    <div style={{ marginTop: "40px" }}>
+    <div style={{ marginTop: "60px" }}>
       <Form>
         <Form.Group
           className="mb-3 col-xl-4 col-md-8 col-sm-10"

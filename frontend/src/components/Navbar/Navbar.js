@@ -36,11 +36,17 @@ const NavbarComponent = () => {
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <NavDropdown title="Mybooks" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Liked</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Read</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Reading</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/my-books/1">
+                Read
+              </NavDropdown.Item>
+
+              <NavDropdown.Item as={Link} to="/my-books/2">
+                Read Later
+              </NavDropdown.Item>
+
+              <NavDropdown.Item as={Link} to="/my-books/3">
+                Reading
+              </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#link">Account</Nav.Link>
           </Nav>

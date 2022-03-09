@@ -5,13 +5,10 @@ import axios from "axios";
 import { AppContext } from "../../App";
 axios.defaults.withCredentials = true;
 const Comment = ({ comment_id, username, comment, user_id, isbn }) => {
-  //   const { loading, setLoading } = useContext(AppContext);
   const [likes, setLikes] = useState("");
   const getLikes = async () => {
-    // setLoading(true);
     const res = await axios.get(`${URL}comment/like/${comment_id}`);
     setLikes(res.data.likes);
-    // setLoading(false);
     console.log(res.data.likes);
   };
 
@@ -23,11 +20,10 @@ const Comment = ({ comment_id, username, comment, user_id, isbn }) => {
     console.log(isbn);
     const data = {
       commentID: comment_id,
-      userID: user_id,
       isbn,
     };
     const res = await axios.post(`${URL}comment/like`, data);
-    console.log(res);
+    if (res.data.success) setLikes(likes + 1);
   };
   //   if (loading) return <></>;
   return (
