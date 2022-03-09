@@ -1,16 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, Navigate } from "react-router-dom";
 import { getAllstatus } from "../../utils/status";
+import { AppContext } from "../../App";
+import URL from "../../config";
 axios.defaults.withCredentials = true;
 const NavbarComponent = () => {
   const [status, setStatus] = useState([]);
   const { pathname } = useLocation() || "/";
+  const { logged, setLogged } = useContext(AppContext);
+  const [loading, setLoading] = useState(true);
+  const isAuth = async () => {
+    const res = await axios.get(`${URL}login`);
+    if (res.data.user) {
+      setLogged(res.data.user);
+    } else {
+      setLogged({});
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
+    isAuth();
     getAllstatus(setStatus);
   }, []);
+
+  // protecting routes
+  if (!loading && logged.email == null && pathname !== "/" && pathname !== "/signup") {
+    return <Navigate to="/" />;
+  }
+
+  if (!loading && logged.email && (pathname === "/" || pathname === "/signup")) {
+    return <Navigate to="/home" />;
+  }
+
   if (pathname === "/" || pathname === "/signup") {
     return (
       <Navbar bg="light" expand="lg" fixed="top">

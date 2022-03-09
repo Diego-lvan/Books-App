@@ -10,25 +10,22 @@ axios.defaults.withCredentials = true;
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const { logged, setLogged, loading, setLoading } = useContext(AppContext);
-
+  const { setLogged } = useContext(AppContext);
   const loginUser = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
       const res = await axios.post(`${URL}login`, {
         username: email,
         password: pwd,
       });
-      setLoading(false);
-      console.log(res);
-      if (res.data.success) return setLogged(true);
+      if (res.data.success) {
+        const { user } = res.data;
+        setLogged(user);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  if (logged) return <Navigate to="/home" />;
 
   return (
     <div style={{ marginTop: "60px" }}>

@@ -9,7 +9,7 @@ import BookPage from "./pages/BookPage";
 import MyBooks from "./pages/MyBooks";
 export const AppContext = createContext();
 const App = () => {
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState({});
   const [loading, setLoading] = useState(true);
   return (
     <AppContext.Provider value={{ logged, setLogged, loading, setLoading }}>

@@ -47,7 +47,6 @@ const getByISBN = async (req, res, next) => {
 const getByStatus = async (req, res) => {
   const statusID = req.params.id;
   const userID = req.user.user_id;
-  console.log(statusID);
   const sql = `SELECT book.isbn, book.title, book.filename, book.author FROM book 
   INNER JOIN my_books ON my_books.isbn = book.isbn AND my_books.user_id = ? AND my_books.status_id = ?`;
   const books = await query(sql, [userID, statusID]);
