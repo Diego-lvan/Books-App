@@ -1,5 +1,5 @@
 import axios from "axios";
-import URL from "../config";
+import URL from "config";
 axios.defaults.withCredentials = true;
 export const getComments = async (isbn, setComments) => {
   const res = await axios.get(`${URL}comment/${isbn}`);

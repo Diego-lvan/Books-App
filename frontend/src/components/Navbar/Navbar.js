@@ -3,27 +3,18 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useLocation, Link, Navigate } from "react-router-dom";
-import { getAllstatus } from "../../utils/status";
-import { AppContext } from "../../App";
-import URL from "../../config";
+import { getAllstatus } from "utils/status";
+import { isAuth } from "utils/auth";
+import { AppContext } from "App";
 axios.defaults.withCredentials = true;
 const NavbarComponent = () => {
   const [status, setStatus] = useState([]);
   const { pathname } = useLocation() || "/";
   const { logged, setLogged } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
-  const isAuth = async () => {
-    const res = await axios.get(`${URL}login`);
-    if (res.data.user) {
-      setLogged(res.data.user);
-    } else {
-      setLogged({});
-    }
-    setLoading(false);
-  };
 
   useEffect(() => {
-    isAuth();
+    isAuth(setLogged, setLoading);
     getAllstatus(setStatus);
   }, []);
 

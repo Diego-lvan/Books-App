@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
-import { AppContext } from "../../App";
+import { AppContext } from "App";
 import axios from "axios";
-import URL from "../../config";
+import URL from "config";
 import { Link } from "react-router-dom";
 
 import BookCard from "../books/BookCard";

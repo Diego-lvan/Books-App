@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Login from "./components/auth/Login";
-import AddBook from "./components/books/AddBook";
-import Navbar from "./components/Navbar/Navbar";
+import Login from "components/auth/Login";
+import AddBook from "components/books/AddBook";
+import Navbar from "components/Navbar/Navbar";
 import { createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/home/Home";
-import BookPage from "./pages/BookPage";
-import MyBooks from "./pages/MyBooks";
+import Home from "components/home/Home";
+import BookPage from "pages/BookPage";
+import MyBooks from "pages/MyBooks";
 export const AppContext = createContext();
 const App = () => {
   const [logged, setLogged] = useState({});

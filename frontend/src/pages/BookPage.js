@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { AppContext } from "../App";
+import { AppContext } from "App";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AddComment from "../components/comments/AddComment";
-import Comments from "../components/comments/Comments";
-import { updateStatus, fetchStatus } from "../utils/status";
-import { fetchMyBooksStatus } from "../utils/myBooks";
-import { getComments } from "../utils/comments";
-import { fetchBook } from "../utils/books";
-import Book from "../components/books/Book";
+import AddComment from "components/comments/AddComment";
+import Comments from "components/comments/Comments";
+import { updateStatus, fetchStatus } from "utils/status";
+import { fetchMyBooksStatus } from "utils/myBooks";
+import { getComments } from "utils/comments";
+import { fetchBook } from "utils/books";
+import Book from "components/books/Book";
 axios.defaults.withCredentials = true;
 const BookPage = () => {
   const [book, setBook] = useState();

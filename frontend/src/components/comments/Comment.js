@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AiTwotoneLike } from "react-icons/ai";
-import URL from "../../config";
+import URL from "config";
 import axios from "axios";
-import { addLike } from "../../utils/comments";
+import { addLike } from "utils/comments";
 axios.defaults.withCredentials = true;
 const Comment = ({ comment_id, username, comment, isbn }) => {
   const [likes, setLikes] = useState("");

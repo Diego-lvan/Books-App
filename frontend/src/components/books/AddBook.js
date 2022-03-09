@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import URL from "../../config";
+import URL from "config";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AppContext } from "../../App";
+import { AppContext } from "App";
 axios.defaults.withCredentials = true;
 
 const config = { headers: { "Content-Type": "multipart/form-data" } };

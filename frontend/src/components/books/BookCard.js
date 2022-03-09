@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import URL from "../../config";
-import defaultImg from "../../assets/img/not-found.png";
+import defaultImg from "assets/img/not-found.png";
 import { Link } from "react-router-dom";
 const BookCard = ({ isbn, filename, title, author }) => {
   return (

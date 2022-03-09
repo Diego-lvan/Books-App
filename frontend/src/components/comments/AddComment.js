@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
-import { addComment } from "../../utils/comments";
+import { addComment } from "utils/comments";
 const AddComment = ({ comments, setComments, getComments }) => {
   const [comment, setComment] = useState("");
   const { isbn } = useParams();

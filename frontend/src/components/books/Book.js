@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import URL from "../../config";
+import URL from "config";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import defaultImg from "../../assets/img/not-found.png";
+import defaultImg from "assets/img/not-found.png";
 
 axios.defaults.withCredentials = true;
 const Book = ({ book, status, setStatusSelected, statusSelected }) => {

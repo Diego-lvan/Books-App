@@ -1,5 +1,5 @@
 import axios from "axios";
-import URL from "../config";
+import URL from "config";
 axios.defaults.withCredentials = true;
 
 export const getAllstatus = async (setStatus) => {

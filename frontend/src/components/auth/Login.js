@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import URL from "../../config";
-import { AppContext } from "../../App";
+import URL from "config";
+import { AppContext } from "App";
 import { Navigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
