@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
-import Book from "./components/books/Book";
+import BookPage from "./pages/BookPage";
 import MyBooks from "./pages/MyBooks";
 export const AppContext = createContext();
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/" element={<Login />} />
           <Route exact path="/admin" element={<AddBook />} />
-          <Route exact path="/book/:isbn" element={<Book />} />
+          <Route exact path="/book/:isbn" element={<BookPage />} />
           <Route exact path="/my-books/:id" element={<MyBooks />} />
         </Routes>
         {/* <AddBook /> */}

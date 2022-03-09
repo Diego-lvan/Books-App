@@ -1,20 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import URL from "../../config";
-import { AppContext } from "../../App";
+import { addComment } from "../../utils/comments";
 const AddComment = ({ comments, setComments, getComments }) => {
   const [comment, setComment] = useState("");
   const { isbn } = useParams();
-  const { loading, setLoading } = useContext(AppContext);
-  const addComment = async () => {
-    setLoading(true);
-    const res = await axios.post(`${URL}comment`, { comment, isbn });
-    await getComments(isbn, URL, setLoading);
-    setLoading(false);
-  };
+  console.log(isbn);
 
   return (
     <div>
@@ -29,7 +21,11 @@ const AddComment = ({ comments, setComments, getComments }) => {
           />
         </Form.Group>
         <Form.Group>
-          <Button variant="primary" type="button" onClick={addComment}>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={() => addComment(comment, isbn, setComments)}
+          >
             Comment
           </Button>
         </Form.Group>

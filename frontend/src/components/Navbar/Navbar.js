@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import URL from "../../config";
 import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
+import { getAllstatus } from "../../utils/status";
 axios.defaults.withCredentials = true;
 const NavbarComponent = () => {
+  const [status, setStatus] = useState([]);
   const { pathname } = useLocation() || "/";
+  useEffect(() => {
+    getAllstatus(setStatus);
+  }, []);
   if (pathname === "/" || pathname === "/signup") {
     return (
       <Navbar bg="light" expand="lg" fixed="top">
@@ -30,23 +34,21 @@ const NavbarComponent = () => {
   return (
     <Navbar bg="light" expand="lg" fixed="top" style={{ marginBottom: "50px" }}>
       <Container>
-        <Navbar.Brand href="#home">Uniread</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/home">
+          Uniread
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link as={Link} to="/home">
+              Home
+            </Nav.Link>
             <NavDropdown title="Mybooks" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/my-books/1">
-                Read
-              </NavDropdown.Item>
-
-              <NavDropdown.Item as={Link} to="/my-books/2">
-                Read Later
-              </NavDropdown.Item>
-
-              <NavDropdown.Item as={Link} to="/my-books/3">
-                Reading
-              </NavDropdown.Item>
+              {status.map(({ status_id, status }) => (
+                <NavDropdown.Item key={status_id} as={Link} to={`/my-books/${status_id}`}>
+                  {status}
+                </NavDropdown.Item>
+              ))}
             </NavDropdown>
             <Nav.Link href="#link">Account</Nav.Link>
           </Nav>
