@@ -11,12 +11,14 @@ export const addComment = async (comment, isbn, setComments) => {
   await getComments(isbn, setComments);
 };
 
-export const addLike = async (isbn, comment_id, setLikes, likes) => {
-  console.log(isbn);
+export const addLike = async (isbn, comment_id, setLikes, likes, setUserLiked) => {
   const data = {
     commentID: comment_id,
     isbn,
   };
   const res = await axios.post(`${URL}comment/like`, data);
-  if (res.data.success) setLikes(likes + 1);
+  if (res.data.success) {
+    setLikes(likes + 1);
+    setUserLiked(true);
+  }
 };

@@ -42,11 +42,12 @@ const addLike = async (req, res) => {
 const getCommentsLikes = async (req, res) => {
   try {
     const { commentID } = req.params;
-    const userID = req.user.user_id;
-    const sql = "SELECT COUNT(comment_id) FROM comments_likes WHERE comment_id = ?";
+    const sql = "SELECT user_id FROM comments_likes WHERE comment_id = ?";
     const data = await query(sql, [commentID]);
-    const likes = data[0]["COUNT(comment_id)"];
-    res.json({ likes });
+    if (data.length == 0) {
+      return res.json({ likes: 0, users: [] });
+    }
+    res.json({ likes: data.length, users: data });
   } catch (error) {}
 };
 
