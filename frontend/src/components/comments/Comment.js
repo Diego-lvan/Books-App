@@ -9,9 +9,10 @@ const Comment = ({ comment_id, username, comment, isbn, user_id }) => {
   const [likes, setLikes] = useState("");
   const { logged } = useContext(AppContext);
   const [userLiked, setUserLiked] = useState();
-  const userID = logged.user_id;
+  const userID = logged.userID;
   const getLikes = async () => {
     const res = await axios.get(`${URL}comment/like/${comment_id}`);
+    console.log(res.data.users);
     if (userAlreadyLiked(res.data.users)) {
       setUserLiked(true);
     }
@@ -19,8 +20,9 @@ const Comment = ({ comment_id, username, comment, isbn, user_id }) => {
     setLikes(res.data.likes);
   };
   const userAlreadyLiked = (usersID) => {
+    console.log(userID);
     if (!usersID) return false;
-    return usersID.find(({ user_id }) => user_id === userID);
+    return usersID.find(({ user_id }) => user_id == userID);
   };
   useEffect(() => {
     getLikes();
@@ -36,7 +38,9 @@ const Comment = ({ comment_id, username, comment, isbn, user_id }) => {
           cursor: "pointer",
           color: userLiked ? "#1465A2" : "",
         }}
-        onClick={() => addLike(isbn, comment_id, setLikes, likes, setUserLiked)}
+        onClick={() =>
+          addLike(isbn, comment_id, setLikes, likes, setUserLiked, userLiked)
+        }
       />
       <span>{likes}</span>
     </div>

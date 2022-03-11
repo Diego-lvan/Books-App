@@ -66,7 +66,19 @@ const NavbarComponent = () => {
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
-            <Nav.Link href="#link">Account</Nav.Link>
+            <Nav.Link as={Link} to="/account">
+              Account
+            </Nav.Link>
+            {logged.isAdmin && (
+              <NavDropdown title="Mybooks" id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to="/admin/add-book">
+                  Add book
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/admin/add-book">
+                  Update book
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -5,8 +5,8 @@ import { AppContext } from "App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddComment from "components/comments/AddComment";
 import Comments from "components/comments/Comments";
-import { updateStatus, fetchStatus } from "utils/status";
-import { fetchMyBooksStatus } from "utils/myBooks";
+import { fetchStatus as fetchAllStatus } from "utils/status";
+import { fetchMyBooksStatus, updateStatus } from "utils/myBooks";
 import { getComments } from "utils/comments";
 import { fetchBook } from "utils/books";
 import Book from "components/books/Book";
@@ -22,12 +22,12 @@ const BookPage = () => {
   useEffect(() => {
     getComments(isbn, setComments);
     fetchBook(isbn, setLoading, setBook);
-    fetchStatus(setStatus);
+    fetchAllStatus(setStatus);
     fetchMyBooksStatus(setStatusSelected, isbn);
   }, []);
 
   useEffect(() => {
-    updateStatus(statusSelected, isbn);
+    updateStatus(statusSelected, isbn, setStatusSelected);
   }, [statusSelected]);
 
   if (!book || loading) return <div></div>;

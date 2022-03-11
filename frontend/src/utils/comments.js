@@ -6,12 +6,20 @@ export const getComments = async (isbn, setComments) => {
   setComments(res.data.comments);
 };
 
-export const addComment = async (comment, isbn, setComments) => {
+export const addComment = async (comment, isbn, setComments, setComment) => {
   await axios.post(`${URL}comment`, { comment, isbn });
   await getComments(isbn, setComments);
 };
 
-export const addLike = async (isbn, comment_id, setLikes, likes, setUserLiked) => {
+export const addLike = async (
+  isbn,
+  comment_id,
+  setLikes,
+  likes,
+  setUserLiked,
+  userLiked
+) => {
+  if (userLiked) return;
   const data = {
     commentID: comment_id,
     isbn,

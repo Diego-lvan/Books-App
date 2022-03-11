@@ -23,10 +23,10 @@ CREATE TABLE status(
 CREATE TABLE book(
  isbn VARCHAR(13) PRIMARY KEY,
  title VARCHAR(30) NOT NULL,
- cover_path VARCHAR(30) NOT NULL,
+ filename VARCHAR(30) NOT NULL,
  no_pages INTEGER(5) NOT NULL,
  author VARCHAR(50) NOT NULL,
- synopsis VARCHAR(300) NOT NULL,
+ synopsis VARCHAR(600) NOT NULL,
  category_id INT NOT NULL,
  FOREIGN KEY (category_id) REFERENCES category(category_id)
 );
@@ -40,7 +40,7 @@ CREATE TABLE comment(
     likes INTEGER(10) DEFAULT  0,
     amount_replies INTEGER(4) DEFAULT  0,
     FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (isbn) REFERENCES book(isbn)
+    FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE 
 );
 
 CREATE TABLE comments_likes (
@@ -50,7 +50,7 @@ CREATE TABLE comments_likes (
     PRIMARY KEY(comment_id,user_id),
     FOREIGN KEY (comment_id) REFERENCES comment(comment_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (isbn) REFERENCES book(isbn)
+    FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE 
 );
 
 
@@ -61,7 +61,7 @@ CREATE TABLE my_books(
     score INT NULL,
     PRIMARY KEY(user_id,isbn),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (isbn) REFERENCES book(isbn) 
+    FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE 
 );
 
 

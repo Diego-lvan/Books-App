@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Login from "components/auth/Login";
-import AddBook from "components/books/AddBook";
+import AddBook from "pages/admin/AddBook";
 import Navbar from "components/Navbar/Navbar";
 import { createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "components/home/Home";
 import BookPage from "pages/BookPage";
 import MyBooks from "pages/MyBooks";
+import Account from "pages/Account";
 export const AppContext = createContext();
 const App = () => {
   const [logged, setLogged] = useState({});
@@ -19,11 +20,11 @@ const App = () => {
           <Route exact path="/" element={<Login />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/" element={<Login />} />
-          <Route exact path="/admin" element={<AddBook />} />
+          <Route exact path="/admin/add-book" element={<AddBook />} />
           <Route exact path="/book/:isbn" element={<BookPage />} />
           <Route exact path="/my-books/:id" element={<MyBooks />} />
+          <Route exact path="/account" element={<Account />} />
         </Routes>
-        {/* <AddBook /> */}
       </BrowserRouter>
     </AppContext.Provider>
   );

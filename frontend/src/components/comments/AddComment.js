@@ -6,7 +6,6 @@ import { addComment } from "utils/comments";
 const AddComment = ({ comments, setComments, getComments }) => {
   const [comment, setComment] = useState("");
   const { isbn } = useParams();
-  console.log(isbn);
 
   return (
     <div>
@@ -24,7 +23,7 @@ const AddComment = ({ comments, setComments, getComments }) => {
           <Button
             variant="primary"
             type="button"
-            onClick={() => addComment(comment, isbn, setComments)}
+            onClick={() => addComment(comment, isbn, setComments, setComment)}
           >
             Comment
           </Button>

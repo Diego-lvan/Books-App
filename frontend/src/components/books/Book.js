@@ -30,8 +30,8 @@ const Book = ({ book, status, setStatusSelected, statusSelected }) => {
               value={statusSelected}
               onChange={(e) => setStatusSelected(e.target.value)}
             >
-              <option value="">Add to my list</option>
-
+              {!statusSelected && <option value="">Add to my list</option>}
+              {statusSelected && <option value="delete">Remove book</option>}
               {status.map(({ status, status_id }) => (
                 <option key={status_id} value={status_id}>
                   {status}
