@@ -3,22 +3,15 @@ import { AppContext } from "App";
 import axios from "axios";
 import URL from "config";
 import { Link } from "react-router-dom";
-
+import { fetchBooks } from "utils/books";
 import BookCard from "../books/BookCard";
 axios.defaults.withCredentials = true;
 const Home = () => {
   const { logged, setLogged, loading, setLoading } = useContext(AppContext);
   const [books, setBooks] = useState([]);
 
-  const fetchBooks = async () => {
-    const res = await axios.get(`${URL}books`);
-    console.log(res.data);
-    setBooks(res.data.books);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    fetchBooks();
+    fetchBooks(setBooks, setLoading);
   }, []);
 
   if (loading) return <h1>Loading</h1>;

@@ -12,7 +12,6 @@ const addBook = async (req, res, next) => {
     synopsis,
     parseInt(categoryID),
   ];
-  console.log(categoryID);
 
   try {
     const sql =
@@ -54,4 +53,27 @@ const getByStatus = async (req, res) => {
   res.json({ books });
 };
 
-module.exports = { addBook, getAllBooks, getByISBN, getByStatus };
+const updateBook = async (req, res) => {
+  try {
+    const { isbn, title, noPages, author, synopsis, categoryID } = req.body;
+    const { file } = req;
+    console.log(isbn + "im here");
+    const fields = [
+      title,
+      parseInt(noPages),
+      author,
+      parseInt(categoryID),
+      file.filename,
+      synopsis,
+      isbn,
+    ];
+    const sql =
+      "UPDATE book SET title =?, no_pages =?,author =?,category_id =?, filename =?, synopsis=? WHERE isbn = ?";
+    await query(sql, fields);
+    res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { addBook, getAllBooks, getByISBN, getByStatus, updateBook };

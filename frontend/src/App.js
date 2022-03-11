@@ -8,6 +8,7 @@ import Home from "components/home/Home";
 import BookPage from "pages/BookPage";
 import MyBooks from "pages/MyBooks";
 import Account from "pages/Account";
+import UpdateBook from "pages/admin/UpdateBook";
 export const AppContext = createContext();
 const App = () => {
   const [logged, setLogged] = useState({});
@@ -20,10 +21,11 @@ const App = () => {
           <Route exact path="/" element={<Login />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/" element={<Login />} />
-          <Route exact path="/admin/add-book" element={<AddBook />} />
           <Route exact path="/book/:isbn" element={<BookPage />} />
           <Route exact path="/my-books/:id" element={<MyBooks />} />
           <Route exact path="/account" element={<Account />} />
+          <Route exact path="/admin/add-book" element={<AddBook />} />
+          <Route exact path="/admin/update-book" element={<UpdateBook />} />
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>

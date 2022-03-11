@@ -10,17 +10,19 @@ const BookForm = ({
   setLoading,
   setCategories,
   setSelectedFile,
-  book,
-  setBook,
+  inputBook,
+  setInputBook,
   selectedFile,
   loading,
   categories,
-  handleSubmit,
+  submitChanges,
+  title,
+  books,
+  setIsbnBookUpdate,
 }) => {
   const getCategories = async () => {
     setLoading(true);
     const res = await axios.get(`${URL}category`);
-    console.log(res.data.categories);
     setCategories(res.data.categories);
     setLoading(false);
   };
@@ -31,28 +33,57 @@ const BookForm = ({
     setSelectedFile(e.target.files[0]);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("bookCover", selectedFile);
+    formData.append("isbn", inputBook.isbn);
+    formData.append("title", inputBook.title);
+    formData.append("noPages", inputBook.noPages);
+    formData.append("author", inputBook.author);
+    formData.append("synopsis", inputBook.synopsis);
+    formData.append("categoryID", inputBook.category);
+    submitChanges(formData);
+  };
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     console.log(name);
-    setBook({ ...book, [name]: value });
+    setInputBook({ ...inputBook, [name]: value });
   };
 
   if (loading) return <></>;
 
   return (
     <Container style={{ margin: "90px auto 0px auto" }}>
-      <h3>Add book</h3>
+      <h3>{title}</h3>
       <Form
         encType="multipart/form-data"
         onSubmit={handleSubmit}
         className="row row-cols-auto"
       >
+        {/* only display in update book */}
+        {books && (
+          <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+            <Form.Select
+              type="text"
+              name="category"
+              onChange={(e) => setIsbnBookUpdate(e.target.value)}
+            >
+              <option value={null}>Select book</option>
+              {books.map(({ title, isbn }) => (
+                <option value={isbn}>{title}</option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+        )}
+
         <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
           <Form.Control
             type="text"
             placeholder="ISBN"
-            value={book.isbn}
+            value={inputBook.isbn}
             onChange={handleChange}
             name="isbn"
           />
@@ -62,7 +93,7 @@ const BookForm = ({
           <Form.Control
             type="text"
             placeholder="Title"
-            value={book.title}
+            value={inputBook.title}
             onChange={handleChange}
             name="title"
           />
@@ -72,7 +103,7 @@ const BookForm = ({
           <Form.Control
             type="text"
             placeholder="Author"
-            value={book.author}
+            value={inputBook.author}
             onChange={handleChange}
             name="author"
           />
@@ -82,7 +113,7 @@ const BookForm = ({
           <Form.Control
             type="text"
             placeholder="No. Pages"
-            value={book.noPages}
+            value={inputBook.noPages}
             onChange={handleChange}
             name="noPages"
           />
@@ -92,7 +123,7 @@ const BookForm = ({
           <Form.Select
             type="text"
             placeholder="Category"
-            value={book.category}
+            value={inputBook.category}
             onChange={handleChange}
             name="category"
           >
@@ -110,7 +141,7 @@ const BookForm = ({
             as="textarea"
             type="text"
             placeholder="Synopsis"
-            value={book.synopsis}
+            value={inputBook.synopsis}
             onChange={handleChange}
             name="synopsis"
           />

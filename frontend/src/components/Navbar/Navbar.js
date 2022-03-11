@@ -74,7 +74,7 @@ const NavbarComponent = () => {
                 <NavDropdown.Item as={Link} to="/admin/add-book">
                   Add book
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/admin/add-book">
+                <NavDropdown.Item as={Link} to="/admin/update-book">
                   Update book
                 </NavDropdown.Item>
               </NavDropdown>

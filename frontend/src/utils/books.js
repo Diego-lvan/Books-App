@@ -7,8 +7,18 @@ export const getBooksByStatus = async (stautsID, setMyBooks) => {
   setMyBooks(res.data.books);
 };
 export const fetchBook = async (isbn, setLoading, setBook) => {
-  setLoading(true);
-  const res = await axios.get(`${URL}book/${isbn}`);
-  setBook(res.data.book);
+  if (isbn) {
+    setLoading(true);
+    const res = await axios.get(`${URL}book/${isbn}`);
+    console.log(res.data);
+    setBook(res.data.book);
+    setLoading(false);
+  }
+};
+
+export const fetchBooks = async (setBooks, setLoading) => {
+  const res = await axios.get(`${URL}books`);
+  console.log(res.data);
+  setBooks(res.data.books);
   setLoading(false);
 };

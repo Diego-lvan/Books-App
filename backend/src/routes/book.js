@@ -1,5 +1,11 @@
 const bookRouter = require("express").Router();
-const { addBook, getAllBooks, getByISBN, getByStatus } = require("../controllers/book");
+const {
+  addBook,
+  getAllBooks,
+  getByISBN,
+  getByStatus,
+  updateBook,
+} = require("../controllers/book");
 const upload = require("../middlewares/uploadFile");
 //post book
 bookRouter.post("/book/add", upload.single("bookCover"), addBook);
@@ -16,5 +22,6 @@ bookRouter.get("/book/:isbn", getByISBN);
 //remove
 
 //update
+bookRouter.put("/book", upload.single("bookCover"), updateBook);
 
 module.exports = bookRouter;

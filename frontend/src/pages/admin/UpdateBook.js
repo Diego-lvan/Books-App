@@ -1,14 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BookForm from "components/books/BookForm";
 import axios from "axios";
 import URL from "config";
 import { AppContext } from "App";
+import { fetchBook, fetchBooks } from "utils/books";
 axios.defaults.withCredentials = true;
 const config = { headers: { "Content-Type": "multipart/form-data" } };
 const UpdateBook = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [categories, setCategories] = useState([]);
   const { loading, setLoading } = useContext(AppContext);
+  const [books, setBooks] = useState([]);
+  const [isbnBookUpdate, setIsbnBookUpdate] = useState("");
+  const [currentBook, setCurrentBook] = useState({});
   const [inputBook, setInputBook] = useState({
     isbn: "",
     title: "",
@@ -17,15 +21,36 @@ const UpdateBook = () => {
     synopsis: "",
     category: "1",
   });
-  const addBook = async (formData) => {
+  const updateBook = async (formData) => {
     try {
-      const res = await axios.post(`${URL}book/add`, formData, config);
-      console.log(res);
+      const res = await axios.put(`${URL}book`, formData, config);
       //check if res.success
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    fetchBooks(setBooks, setLoading);
+    // fetchBook()
+  }, []);
+  //fetch the book to modify
+  useEffect(() => {
+    fetchBook(isbnBookUpdate, setLoading, setCurrentBook);
+  }, [isbnBookUpdate]);
+
+  //display the book to modify
+
+  useEffect(() => {
+    setInputBook({
+      isbn: currentBook.isbn,
+      title: currentBook.title,
+      noPages: currentBook.no_pages,
+      author: currentBook.author,
+      synopsis: currentBook.synopsis,
+      category: currentBook.category_id,
+    });
+  }, [currentBook]);
 
   return (
     <div style={{ marginTop: "50px" }}>
@@ -38,8 +63,10 @@ const UpdateBook = () => {
         setLoading={setLoading}
         inputBook={inputBook}
         setInputBook={setInputBook}
-        submitChanges={addBook}
-        title="Add book"
+        submitChanges={updateBook}
+        title="Update book"
+        books={books}
+        setIsbnBookUpdate={setIsbnBookUpdate}
       />
     </div>
   );
