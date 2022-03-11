@@ -2,6 +2,12 @@ const passport = require("passport");
 const { query } = require("./conn");
 const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local");
+
+const customFields = {
+  passwordField: "pwd",
+  usernameField: "email",
+};
+
 const verify = async (username, password, done) => {
   try {
     const user = await query("SELECT * FROM user WHERE email = ?", [username]);
@@ -13,7 +19,7 @@ const verify = async (username, password, done) => {
   } catch (error) {}
 };
 
-const strategy = new LocalStrategy(verify);
+const strategy = new LocalStrategy(customFields, verify);
 passport.use(strategy);
 
 passport.serializeUser((user, done) => {

@@ -55,6 +55,11 @@ require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.all((req, res, next) => {
+  console.log(req.body + " hola");
+  next();
+});
+
 app.use(userRouter);
 app.use(authRouter);
 app.use(categoryRouter);

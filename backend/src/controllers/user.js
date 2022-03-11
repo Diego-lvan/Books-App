@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 const addUser = async (req, res, next) => {
   const { email, pwd, user } = req.body;
+
   if (!email || !pwd || !user || email.length > 50 || user.length > 20) {
     return res.json({ sucess: false, status: 400 });
   }
@@ -13,9 +14,9 @@ const addUser = async (req, res, next) => {
     await query(sql, [email, hashedPwd, user]);
   } catch (error) {
     console.log(error);
-    return res.json({ sucess: false });
+    return res.json({ success: false });
   }
-  res.json({ sucess: true, status: 201 });
+  res.json({ success: true, status: 201 });
 };
 
 module.exports = { addUser };

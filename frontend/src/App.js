@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Login from "components/auth/Login";
+import Login from "pages/Login";
 import AddBook from "pages/admin/AddBook";
 import Navbar from "components/Navbar/Navbar";
 import { createContext } from "react";
@@ -9,6 +9,7 @@ import BookPage from "pages/BookPage";
 import MyBooks from "pages/MyBooks";
 import Account from "pages/Account";
 import UpdateBook from "pages/admin/UpdateBook";
+import SignUp from "pages/SignUp";
 export const AppContext = createContext();
 const App = () => {
   const [logged, setLogged] = useState({});
@@ -19,8 +20,8 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Login />} />
+          <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/home" element={<Home />} />
-          <Route exact path="/" element={<Login />} />
           <Route exact path="/book/:isbn" element={<BookPage />} />
           <Route exact path="/my-books/:id" element={<MyBooks />} />
           <Route exact path="/account" element={<Account />} />

@@ -49,11 +49,8 @@ const BookForm = ({
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(name);
     setInputBook({ ...inputBook, [name]: value });
   };
-
-  if (loading) return <></>;
 
   return (
     <Container style={{ margin: "90px auto 0px auto" }}>

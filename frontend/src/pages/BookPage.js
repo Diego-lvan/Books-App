@@ -21,7 +21,7 @@ const BookPage = () => {
 
   useEffect(() => {
     getComments(isbn, setComments);
-    fetchBook(isbn, setLoading, setBook);
+    fetchBook(isbn, setBook, setLoading);
     fetchAllStatus(setStatus);
     fetchMyBooksStatus(setStatusSelected, isbn);
   }, []);

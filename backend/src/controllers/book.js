@@ -55,20 +55,22 @@ const getByStatus = async (req, res) => {
 
 const updateBook = async (req, res) => {
   try {
-    const { isbn, title, noPages, author, synopsis, categoryID } = req.body;
+    let { isbn, title, noPages, author, synopsis, categoryID } = req.body;
     const { file } = req;
-    console.log(isbn + "im here");
-    const fields = [
-      title,
-      parseInt(noPages),
-      author,
-      parseInt(categoryID),
-      file.filename,
-      synopsis,
-      isbn,
-    ];
-    const sql =
-      "UPDATE book SET title =?, no_pages =?,author =?,category_id =?, filename =?, synopsis=? WHERE isbn = ?";
+    noPages = parseInt(noPages);
+    categoryID = parseInt(categoryID);
+    let fields, sql;
+    if (!file) {
+      fields = [title, noPages, author, categoryID, synopsis, isbn];
+      sql =
+        "UPDATE book SET title =?, no_pages =?,author =?,category_id =?, synopsis=? WHERE isbn = ?";
+    }
+
+    if (file) {
+      fields = [title, noPages, author, categoryID, file.filename, synopsis, isbn];
+      sql =
+        "UPDATE book SET title =?, no_pages =?,author =?,category_id =?, filename =?, synopsis=? WHERE isbn = ?";
+    }
     await query(sql, fields);
     res.json({ success: true });
   } catch (error) {

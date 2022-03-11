@@ -36,7 +36,7 @@ const UpdateBook = () => {
   }, []);
   //fetch the book to modify
   useEffect(() => {
-    fetchBook(isbnBookUpdate, setLoading, setCurrentBook);
+    fetchBook(isbnBookUpdate, setCurrentBook);
   }, [isbnBookUpdate]);
 
   //display the book to modify

@@ -69,8 +69,8 @@ const NavbarComponent = () => {
             <Nav.Link as={Link} to="/account">
               Account
             </Nav.Link>
-            {logged.isAdmin && (
-              <NavDropdown title="Mybooks" id="basic-nav-dropdown">
+            {logged.isAdmin ? (
+              <NavDropdown title="Admin" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/admin/add-book">
                   Add book
                 </NavDropdown.Item>
@@ -78,6 +78,8 @@ const NavbarComponent = () => {
                   Update book
                 </NavDropdown.Item>
               </NavDropdown>
+            ) : (
+              ""
             )}
           </Nav>
         </Navbar.Collapse>
