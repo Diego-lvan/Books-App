@@ -29,7 +29,7 @@ const UserForm = ({
           />
         </Form.Group>
         {username != null && (
-          <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10" controlId="formBasicEmail">
+          <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
             <Form.Label>Username</Form.Label>
             <Form.Control
               type="text"

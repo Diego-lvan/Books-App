@@ -24,7 +24,8 @@ const App = () => {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/book/:isbn" element={<BookPage />} />
           <Route exact path="/my-books/:id" element={<MyBooks />} />
-          <Route exact path="/account" element={<Account />} />
+          <Route exact path="/account/info" element={<Account />} />
+
           <Route exact path="/admin/add-book" element={<AddBook />} />
           <Route exact path="/admin/update-book" element={<UpdateBook />} />
         </Routes>

@@ -4,8 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useLocation, Link, Navigate } from "react-router-dom";
 import { getAllstatus } from "utils/status";
-import { isAuth } from "utils/auth";
+import { isAuth, logout } from "utils/auth";
 import { AppContext } from "App";
+import URL from "config";
 axios.defaults.withCredentials = true;
 const NavbarComponent = () => {
   const [status, setStatus] = useState([]);
@@ -66,9 +67,13 @@ const NavbarComponent = () => {
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
-            <Nav.Link as={Link} to="/account">
-              Account
-            </Nav.Link>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/account/info">
+                Your info
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={() => logout(setLogged)}>Logout</NavDropdown.Item>
+            </NavDropdown>
+
             {logged.isAdmin ? (
               <NavDropdown title="Admin" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/admin/add-book">

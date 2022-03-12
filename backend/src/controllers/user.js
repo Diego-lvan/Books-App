@@ -16,7 +16,7 @@ const addUser = async (req, res, next) => {
     console.log(error);
     return res.json({ success: false });
   }
-  res.json({ success: true, status: 201 });
+  next();
 };
 
 const updateUser = async (req, res) => {

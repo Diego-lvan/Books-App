@@ -7,11 +7,15 @@ authRouter.post("/login", passport.authenticate("local"), (req, res) => {
 
 //is user logged in
 authRouter.get("/login", (req, res) => {
-  console.log(req.user);
   if (req.user) {
     return res.json({ user: req.user });
   }
   res.json({ success: false });
+});
+
+authRouter.post("/logout", (req, res) => {
+  req.logOut();
+  res.json({ success: true });
 });
 
 module.exports = authRouter;

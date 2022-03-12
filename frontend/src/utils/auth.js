@@ -11,3 +11,8 @@ export const isAuth = async (setLogged, setLoading) => {
   }
   setLoading(false);
 };
+
+export const logout = async (setLogged) => {
+  await axios.post(`${URL}logout`);
+  setLogged({});
+};
