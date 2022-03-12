@@ -2,6 +2,8 @@ const { query } = require("../config/conn");
 const { verifyLength, isNotEmpty } = require("../helpers/checkFields");
 const addBook = async (req, res, next) => {
   const { isbn, title, noPages, author, synopsis, categoryID } = req.body;
+  if (!isbn || !title || !noPages || !author || !synopsis || !categoryID)
+    return res.json({ success: false });
   const { file } = req;
   const fields = [
     isbn,
@@ -38,6 +40,7 @@ const getAllBooks = async (req, res, next) => {
 
 const getByISBN = async (req, res, next) => {
   const { isbn } = req.params;
+  if (!isbn) return res.json({ success: false });
   const sql = "SELECT * FROM book WHERE isbn = ?";
   const data = await query(sql, [isbn]);
   if (data.length == 0) return res.json({ success: false, msg: "Not found" });
@@ -47,6 +50,7 @@ const getByISBN = async (req, res, next) => {
 const getByStatus = async (req, res) => {
   const statusID = req.params.id;
   const { userID } = req.user;
+  if (!statusID || !userID) return res.json({ success: true });
   const sql = `SELECT book.isbn, book.title, book.filename, book.author FROM book 
   INNER JOIN my_books ON my_books.isbn = book.isbn AND my_books.user_id = ? AND my_books.status_id = ?`;
   const books = await query(sql, [userID, statusID]);
@@ -56,6 +60,9 @@ const getByStatus = async (req, res) => {
 const updateBook = async (req, res) => {
   try {
     let { isbn, title, noPages, author, synopsis, categoryID } = req.body;
+    if (!isbn || !title || !noPages || !author || !synopsis || !categoryID) {
+      return res.json({ success: false });
+    }
     const { file } = req;
     noPages = parseInt(noPages);
     categoryID = parseInt(categoryID);

@@ -70,7 +70,9 @@ const BookForm = ({
             >
               <option value={null}>Select book</option>
               {books.map(({ title, isbn }) => (
-                <option value={isbn}>{title}</option>
+                <option key={isbn} value={isbn}>
+                  {title}
+                </option>
               ))}
             </Form.Select>
           </Form.Group>
@@ -125,7 +127,9 @@ const BookForm = ({
             name="category"
           >
             {categories.map(({ category, category_id }) => (
-              <option value={category_id}>{category}</option>
+              <option key={category_id} value={category_id}>
+                {category}
+              </option>
             ))}
           </Form.Select>
         </Form.Group>

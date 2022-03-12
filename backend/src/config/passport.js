@@ -27,10 +27,10 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(async (username, done) => {
+passport.deserializeUser(async (userData, done) => {
   // grabs the email from session.passport.user and adds it to req.user
   const sql = "SELECT * FROM user WHERE user_id=? ";
-  const user = await query(sql, [username.userID]);
-  const { email, user_id, is_admin } = user[0];
-  done(null, { email, userID: user_id, isAdmin: is_admin });
+  const user = await query(sql, [userData.userID]);
+  const { email, user_id, is_admin, username } = user[0];
+  done(null, { email, userID: user_id, isAdmin: is_admin, username });
 });

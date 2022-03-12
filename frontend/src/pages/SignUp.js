@@ -5,7 +5,9 @@ import URL from "config";
 axios.defaults.withCredentials = true;
 const SignUp = () => {
   const [username, setUsername] = useState("");
-  const createUser = async (e, email, setLogged, pwd) => {
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
+  const createUser = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${URL}user`, {
@@ -28,9 +30,12 @@ const SignUp = () => {
       <UserForm
         handleSubmit={createUser}
         title="Sign Up"
-        signup={true}
         username={username}
         setUsername={setUsername}
+        email={email}
+        setEmail={setEmail}
+        pwd={pwd}
+        setPwd={setPwd}
       />
     </div>
   );

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import UserForm from "components/auth/UserForm";
 import axios from "axios";
 import URL from "config";
+import { AppContext } from "App";
+
 axios.defaults.withCredentials = true;
 
 const Login = () => {
-  const loginUser = async (e, email, setLogged, pwd) => {
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
+  const { setLogged } = useContext(AppContext);
+
+  const loginUser = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${URL}login`, {
@@ -23,7 +29,14 @@ const Login = () => {
 
   return (
     <div>
-      <UserForm handleSubmit={loginUser} title="Login" />
+      <UserForm
+        handleSubmit={loginUser}
+        title="Login"
+        email={email}
+        setEmail={setEmail}
+        pwd={pwd}
+        setPwd={setPwd}
+      />
     </div>
   );
 };
