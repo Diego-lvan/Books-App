@@ -21,10 +21,11 @@ const addUser = async (req, res, next) => {
 
 const updateUser = async (req, res) => {
   try {
+    const { filename } = req.file;
     const { userID } = req.user;
     const { email, user } = req.body;
-    const sql = "UPDATE user SET email = ?, username = ? WHERE user_id = ?";
-    await query(sql, [email, user, userID]);
+    const sql = "UPDATE user SET email = ?, username = ?, user_img = ? WHERE user_id = ?";
+    await query(sql, [email, user, filename, userID]);
     res.json({ success: true });
   } catch (error) {
     console.log(error);

@@ -11,14 +11,7 @@ export const addComment = async (comment, isbn, setComments, setComment) => {
   await getComments(isbn, setComments);
 };
 
-export const addLike = async (
-  isbn,
-  comment_id,
-  setLikes,
-  likes,
-  setUserLiked,
-  userLiked
-) => {
+export const addLike = async (isbn, comment_id, setLikes, likes, setUserLiked, userLiked) => {
   if (userLiked) return;
   const data = {
     commentID: comment_id,

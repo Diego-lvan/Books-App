@@ -4,8 +4,10 @@ import URL from "config";
 import axios from "axios";
 import { addLike } from "utils/comments";
 import { AppContext } from "App";
+import userDefault from "assets/img/user.png";
+
 axios.defaults.withCredentials = true;
-const Comment = ({ comment_id, username, comment, isbn, user_id }) => {
+const Comment = ({ comment_id, username, comment, isbn, user_id, user_img }) => {
   const [likes, setLikes] = useState("");
   const { logged } = useContext(AppContext);
   const [userLiked, setUserLiked] = useState();
@@ -30,17 +32,21 @@ const Comment = ({ comment_id, username, comment, isbn, user_id }) => {
 
   return (
     <div>
-      <h2>{username}</h2>
-      <span>{comment}</span>
+      <img
+        alt=""
+        style={{ width: "40px", borderRadius: "50%" }}
+        src={`${URL}users/${logged.img}`}
+        onError={(e) => (e.target.src = userDefault)}
+      ></img>
+      <h2 style={{ display: "inline-block" }}>{username}</h2>
+      <span style={{ display: "block" }}>{comment}</span>
       <AiTwotoneLike
         style={{
           background: "none",
           cursor: "pointer",
           color: userLiked ? "#1465A2" : "",
         }}
-        onClick={() =>
-          addLike(isbn, comment_id, setLikes, likes, setUserLiked, userLiked)
-        }
+        onClick={() => addLike(isbn, comment_id, setLikes, likes, setUserLiked, userLiked)}
       />
       <span>{likes}</span>
     </div>

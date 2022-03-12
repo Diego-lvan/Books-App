@@ -7,7 +7,8 @@ const {
   updateBook,
 } = require("../controllers/book");
 const upload = require("../middlewares/uploadFile");
-//post book
+// post book
+
 bookRouter.post("/book/add", upload.single("bookCover"), addBook);
 
 //get all books

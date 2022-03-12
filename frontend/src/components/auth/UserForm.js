@@ -4,7 +4,8 @@ import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AppContext } from "App";
 import { Navigate } from "react-router-dom";
-
+import userDefault from "assets/img/user.png";
+import URL from "config";
 const UserForm = ({
   handleSubmit,
   title,
@@ -14,11 +15,28 @@ const UserForm = ({
   setEmail,
   pwd,
   setPwd,
+  userImg,
+  handleFile,
 }) => {
+  const { logged } = useContext(AppContext);
+  console.log(logged.img);
   return (
     <div style={{ marginTop: "60px" }}>
+      <h2 style={{ marginBottom: "20px" }}>{title}</h2>
+
+      {/* Form in account */}
+      {userImg != null && (
+        <div>
+          <img
+            alt=""
+            style={{ width: "90px" }}
+            src={`${URL}users/${logged.img}`}
+            onError={(e) => (e.target.src = userDefault)}
+          ></img>
+        </div>
+      )}
+
       <Form>
-        <h2>{title}</h2>
         <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10" controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -28,6 +46,7 @@ const UserForm = ({
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
+        {/* form in signup and in account */}
         {username != null && (
           <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
             <Form.Label>Username</Form.Label>
@@ -39,6 +58,7 @@ const UserForm = ({
             />
           </Form.Group>
         )}
+        {/* Form in login and signup */}
         {pwd != null && (
           <Form.Group
             className="mb-3 col-xl-4 col-md-8 col-sm-10"
@@ -54,9 +74,10 @@ const UserForm = ({
           </Form.Group>
         )}
 
-        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
+        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+          <Form.Control type="file" onChange={handleFile} name="user-img" />
         </Form.Group>
+
         <Button onClick={(e) => handleSubmit(e)} variant="primary" type="submit">
           Submit
         </Button>
