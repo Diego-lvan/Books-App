@@ -7,7 +7,7 @@ import AddComment from "components/comments/AddComment";
 import Comments from "components/comments/Comments";
 import { fetchStatus as fetchAllStatus } from "utils/status";
 import { fetchMyBooksStatus, updateStatus } from "utils/myBooks";
-import { getComments } from "utils/comments";
+import { getComments, addComment } from "utils/comments";
 import { fetchBook } from "utils/books";
 import Book from "components/books/Book";
 axios.defaults.withCredentials = true;
@@ -18,6 +18,7 @@ const BookPage = () => {
   const [status, setStatus] = useState([]);
   const [statusSelected, setStatusSelected] = useState("");
   const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     getComments(isbn, setComments);
@@ -42,8 +43,10 @@ const BookPage = () => {
       />
       <AddComment
         setComments={setComments}
-        comments={comments}
-        getComments={getComments}
+        buttonText="Comment"
+        comment={comment}
+        setComment={setComment}
+        addComment={addComment}
       />
       <Comments comments={comments} />
     </div>

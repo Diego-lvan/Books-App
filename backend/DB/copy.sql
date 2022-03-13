@@ -52,21 +52,21 @@ CREATE TABLE comments_likes (
     FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE 
 );
 
-CREATE TABLE replie(
-    replie_id INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE reply(
+    reply_id INT AUTO_INCREMENT NOT NULL,
     comment_id INT NOT NULL,
     user_id INT NOT NULL,
-    replie VARCHAR(200) NOT NULL,
-    PRIMARY KEY (replie_id,comment_id),
+    reply VARCHAR(200) NOT NULL,
+    PRIMARY KEY (reply_id,comment_id),
     FOREIGN KEY (comment_id) REFERENCES comment(comment_id)  ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE replie_likes (
-    replie_id INT NOT NULL,
+CREATE TABLE reply_likes (
+    reply_id INT NOT NULL,
     user_id INT NOT NULL,
-    PRIMARY KEY(replie_id,user_id),
-    FOREIGN KEY (replie_id) REFERENCES replie(replie_id) ON DELETE CASCADE,
+    PRIMARY KEY(reply_id,user_id),
+    FOREIGN KEY (reply_id) REFERENCES reply(reply_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
 );
 

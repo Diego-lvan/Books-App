@@ -23,3 +23,11 @@ export const addLike = async (isbn, comment_id, setLikes, likes, setUserLiked, u
     setUserLiked(true);
   }
 };
+
+export const getLikes = async (userAlreadyLiked, comment_id, setUserLiked, setLikes) => {
+  const res = await axios.get(`${URL}comment/like/${comment_id}`);
+  if (userAlreadyLiked(res.data.users)) {
+    setUserLiked(true);
+  }
+  setLikes(res.data.likes);
+};

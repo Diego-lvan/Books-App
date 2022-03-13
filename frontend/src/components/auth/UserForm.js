@@ -73,10 +73,12 @@ const UserForm = ({
             />
           </Form.Group>
         )}
-
-        <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
-          <Form.Control type="file" onChange={handleFile} name="user-img" />
-        </Form.Group>
+        {/* Display only in account page */}
+        {handleFile && (
+          <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
+            <Form.Control type="file" onChange={handleFile} name="user-img" />
+          </Form.Group>
+        )}
 
         <Button onClick={(e) => handleSubmit(e)} variant="primary" type="submit">
           Submit

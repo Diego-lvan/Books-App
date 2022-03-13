@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useParams } from "react-router-dom";
 import { addReply } from "utils/reply";
-const AddComment = ({ setComments, buttonText, comment, setComment, addComment }) => {
-  const { isbn } = useParams();
+const AddComment = ({ setReplyInput, replyInput, setReplies, commentID }) => {
   return (
     <div>
       <div className="comment-input">
@@ -13,17 +11,17 @@ const AddComment = ({ setComments, buttonText, comment, setComment, addComment }
             as="textarea"
             type="text"
             placeholder="Add a new comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            value={replyInput}
+            onChange={(e) => setReplyInput(e.target.value)}
           />
         </Form.Group>
         <Form.Group>
           <Button
             variant="primary"
             type="button"
-            onClick={() => addComment(comment, isbn, setComments, setComment)}
+            onClick={() => addReply(commentID, replyInput)}
           >
-            {buttonText}
+            Reply
           </Button>
         </Form.Group>
       </div>
