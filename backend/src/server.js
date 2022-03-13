@@ -8,6 +8,8 @@ const bookRouter = require("./routes/book");
 const statusRouter = require("./routes/status");
 const myBooksRouter = require("./routes/myBooks");
 const commentsRouter = require("./routes/comments");
+const replieRouter = require("./routes/replie");
+
 const path = require("path");
 const { conn } = require("./config/conn");
 const session = require("express-session");
@@ -67,6 +69,7 @@ app.use(bookRouter);
 app.use(statusRouter);
 app.use(myBooksRouter);
 app.use(commentsRouter);
+app.use(replieRouter);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Listening in port ${process.env.PORT || 5000}`);

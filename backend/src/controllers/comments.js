@@ -15,7 +15,7 @@ const getComments = async (req, res) => {
   try {
     const { isbn } = req.params;
     const sql = `SELECT comment.comment_id, comment.user_id, comment.comment, comment.created_date, 
-              comment.likes, comment.amount_replies, user.username, comment.isbn,user.user_img 
+              comment.amount_replies, user.username, comment.isbn,user.user_img 
               FROM comment INNER JOIN user 
               ON user.user_id = comment.user_id AND comment.isbn = ? ORDER BY created_date DESC;
 `;

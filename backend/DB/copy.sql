@@ -37,9 +37,8 @@ CREATE TABLE comment(
     comment VARCHAR(200) NOT NULL,
     created_date DATETIME NOT NULL DEFAULT  now(),
     isbn VARCHAR(13) NOT NULL,
-    likes INTEGER(10) DEFAULT  0,
     amount_replies INTEGER(4) DEFAULT  0,
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
     FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE 
 );
 
@@ -48,9 +47,27 @@ CREATE TABLE comments_likes (
     user_id INT NOT NULL,
      isbn VARCHAR(13) NOT NULL,
     PRIMARY KEY(comment_id,user_id),
-    FOREIGN KEY (comment_id) REFERENCES comment(comment_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (comment_id) REFERENCES comment(comment_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
     FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE 
+);
+
+CREATE TABLE replie(
+    replie_id INT AUTO_INCREMENT NOT NULL,
+    comment_id INT NOT NULL,
+    user_id INT NOT NULL,
+    replie VARCHAR(200) NOT NULL,
+    PRIMARY KEY (replie_id,comment_id),
+    FOREIGN KEY (comment_id) REFERENCES comment(comment_id)  ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE replie_likes (
+    replie_id INT NOT NULL,
+    user_id INT NOT NULL,
+    PRIMARY KEY(replie_id,user_id),
+    FOREIGN KEY (replie_id) REFERENCES replie(replie_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
 );
 
 
@@ -60,9 +77,10 @@ CREATE TABLE my_books(
     status_id INT NOT NULL,
     score INT NULL,
     PRIMARY KEY(user_id,isbn),
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
     FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE 
 );
+
 
 
 
@@ -83,3 +101,10 @@ SELECT  user.user_id FROM comments_likes
 
 
 SELECT book.isbn, book.title, book.filename, book.author FROM book INNER JOIN my_books ON my_books.isbn = book.isbn AND my_books.user_id = 4 AND my_books.status_id = 2;
+
+
+
+SELECT replie.replie, replie.replie_id, user.username, user.user_img 
+FROM replie 
+((INNER JOIN user ON user.user_id = replie.user_id)
+(INNER JOIN comment ON comment.comment_id = replie.comment_id AND comment_id = ?);

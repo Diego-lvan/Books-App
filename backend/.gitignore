@@ -1,2 +1,9 @@
 node_modules
 .env
+### Images ###
+# JPEG
+*.jpg
+*.jpeg
+
+# Portable Network Graphics
+*.png
