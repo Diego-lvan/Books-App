@@ -2,7 +2,18 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { addReply } from "utils/reply";
-const AddComment = ({ setReplyInput, replyInput, setReplies, commentID }) => {
+const AddComment = ({
+  setReplyInput,
+  replyInput,
+  setReplies,
+  commentID,
+  setShowReplyForm,
+}) => {
+  const handleSubmit = () => {
+    addReply(commentID, replyInput, setReplies);
+    setShowReplyForm(false);
+  };
+
   return (
     <div>
       <div className="comment-input">
@@ -16,11 +27,7 @@ const AddComment = ({ setReplyInput, replyInput, setReplies, commentID }) => {
           />
         </Form.Group>
         <Form.Group>
-          <Button
-            variant="primary"
-            type="button"
-            onClick={() => addReply(commentID, replyInput)}
-          >
+          <Button variant="primary" type="button" onClick={handleSubmit}>
             Reply
           </Button>
         </Form.Group>

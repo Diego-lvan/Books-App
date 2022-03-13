@@ -47,6 +47,7 @@ const CommentButtons = ({
           replyInput={replyInput}
           setReplies={setReplies}
           commentID={commentID}
+          setShowReplyForm={setShowReplyForm}
         />
       )}
     </div>

@@ -28,4 +28,19 @@ const getReplies = async (req, res) => {
   }
 };
 
-module.exports = { addReply, getReplies };
+const getLikes = async (req, res) => {
+  const { replyID } = req.params;
+  const sql = "SELECT user_id FROM reply_likes WHERE reply_id = ?";
+  const likes = await query(sql, [replyID]);
+  res.json({ likes });
+};
+
+const addLike = async (req, res) => {
+  const { replyID } = req.body;
+  const { userID } = req.user;
+  const sql = "INSERT INTO reply_likes (reply_id,user_id) VALUES (?,?)";
+  await query(sql, [replyID, userID]);
+  res.json({ success: true });
+};
+
+module.exports = { addReply, getReplies, addLike, getLikes };
