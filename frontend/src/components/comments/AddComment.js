@@ -3,7 +3,8 @@ import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
 import { addReply } from "utils/reply";
-const AddComment = ({ setComments, buttonText, comment, setComment, addComment }) => {
+import Comments from "utils/comments";
+const AddComment = ({ setComments, buttonText, comment, setComment }) => {
   const { isbn } = useParams();
   return (
     <div>
@@ -21,7 +22,7 @@ const AddComment = ({ setComments, buttonText, comment, setComment, addComment }
           <Button
             variant="primary"
             type="button"
-            onClick={() => addComment(comment, isbn, setComments, setComment)}
+            onClick={() => Comments.addComment(comment, isbn, setComments, setComment)}
           >
             {buttonText}
           </Button>

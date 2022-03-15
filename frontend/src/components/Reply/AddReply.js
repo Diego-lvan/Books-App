@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { addReply } from "utils/reply";
+import Replies from "utils/reply";
 const AddComment = ({
   setReplyInput,
   replyInput,
@@ -10,7 +10,7 @@ const AddComment = ({
   setShowReplyForm,
 }) => {
   const handleSubmit = () => {
-    addReply(commentID, replyInput, setReplies);
+    Replies.addReply(commentID, replyInput, setReplies);
     setShowReplyForm(false);
   };
 

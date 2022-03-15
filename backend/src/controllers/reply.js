@@ -21,7 +21,6 @@ const getReplies = async (req, res) => {
               INNER JOIN user u ON u.user_id = r.user_id
               INNER JOIN comment c ON c.comment_id = r.comment_id AND c.comment_id = ? ORDER BY r.reply_id ASC`;
     const replies = await query(sql, [commentID]);
-    console.log(replies);
     res.json({ replies });
   } catch (error) {
     console.log(error);

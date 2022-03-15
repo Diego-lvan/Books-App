@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import URL from "config";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import defaultImg from "assets/img/not-found.png";
-
 axios.defaults.withCredentials = true;
-const Book = ({ book, status, setStatusSelected, statusSelected }) => {
+const Book = ({ book, status, setStatusSelected, statusSelected, score, setScore }) => {
+  const scoreValues = [1, 2, 3, 4, 5];
+
   return (
     <div style={{ marginTop: "90px" }} className="container">
       <div className="row">
@@ -39,6 +40,19 @@ const Book = ({ book, status, setStatusSelected, statusSelected }) => {
               ))}
             </Form.Select>
           </Form.Group>
+          {/* show rate form if user read the book */}
+          {statusSelected == 1 && (
+            <Form.Group className="mb-3 col-xl-8 col-md-4 col-sm-6 col-4">
+              <Form.Select value={score} onChange={(e) => setScore(e.target.value)}>
+                <option value="">Rate book</option>
+                {scoreValues.map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+          )}
         </div>
         <div className="col-9">
           <h1>{book.title}</h1>

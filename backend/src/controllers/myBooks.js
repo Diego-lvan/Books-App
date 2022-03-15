@@ -34,4 +34,23 @@ const deleteMyBook = async (req, res) => {
   }
 };
 
-module.exports = { addMyBook, getMyBooks, deleteMyBook };
+const rateBook = async (req, res) => {
+  try {
+    const { isbn, score } = req.body;
+    const { userID } = req.user;
+    console.log(userID, isbn);
+    const sql = "UPDATE my_books SET score = ? WHERE isbn = ? AND user_id = ?";
+    await query(sql, [score, isbn, userID]);
+    res.json({ success: true });
+  } catch (error) {}
+};
+
+const getScore = async (req, res) => {
+  const { isbn } = req.params;
+  const { userID } = req.user;
+  const sql = "SELECT score FROM my_books WHERE isbn = ? AND user_id = ? ";
+  const score = await query(sql, [isbn, userID]);
+  res.json({ score: score[0].score });
+};
+
+module.exports = { addMyBook, getMyBooks, deleteMyBook, rateBook, getScore };

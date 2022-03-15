@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import URL from "config";
 import axios from "axios";
-import { addLike, getLikes } from "utils/comments";
+import Comments from "utils/comments";
 import { AppContext } from "App";
 import userDefault from "assets/img/user.png";
-import AddComment from "components/comments/AddComment";
 import CommentButtons from "components/comments/commentButtons";
 import Replies from "components/Reply/Replies";
 axios.defaults.withCredentials = true;
@@ -22,7 +21,7 @@ const Comment = ({ comment_id, username, comment, isbn, user_id, user_img }) => 
   };
 
   useEffect(() => {
-    getLikes(userAlreadyLiked, comment_id, setUserLiked, setLikes);
+    Comments.getLikes(userAlreadyLiked, comment_id, setUserLiked, setLikes);
   }, []);
 
   return (
@@ -39,7 +38,7 @@ const Comment = ({ comment_id, username, comment, isbn, user_id, user_img }) => 
 
       <span style={{ display: "block" }}>{comment}</span>
       <CommentButtons
-        addLike={addLike}
+        addLike={Comments.addLike}
         userLiked={userLiked}
         isbn={isbn}
         commentID={comment_id}

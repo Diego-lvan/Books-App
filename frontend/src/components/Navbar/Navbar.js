@@ -3,8 +3,8 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useLocation, Link, Navigate } from "react-router-dom";
-import { getAllstatus } from "utils/status";
-import { isAuth, logout } from "utils/auth";
+import Status from "utils/status";
+import Auth from "utils/auth";
 import { AppContext } from "App";
 import URL from "config";
 axios.defaults.withCredentials = true;
@@ -13,10 +13,9 @@ const NavbarComponent = () => {
   const { pathname } = useLocation() || "/";
   const { logged, setLogged } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    isAuth(setLogged, setLoading);
-    getAllstatus(setStatus);
+    Auth.isAuth(setLogged, setLoading);
+    Status.getAllstatus(setStatus);
   }, []);
 
   // protecting routes
@@ -71,7 +70,9 @@ const NavbarComponent = () => {
               <NavDropdown.Item as={Link} to="/account/info">
                 Your info
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => logout(setLogged)}>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => Auth.logout(setLogged)}>
+                Logout
+              </NavDropdown.Item>
             </NavDropdown>
 
             {logged.isAdmin ? (

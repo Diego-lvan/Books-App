@@ -15,8 +15,6 @@ const Reply = ({ user_img, username, reply, replyID }) => {
     if (userAlreadyLiked(res.data.likes)) {
       setUserLiked(true);
     }
-
-    console.log(res.data);
   };
 
   const userAlreadyLiked = (usersID) => {
@@ -25,6 +23,7 @@ const Reply = ({ user_img, username, reply, replyID }) => {
   };
 
   const addLike = async () => {
+    if (userLiked) return;
     const res = await axios.post(`${URL}reply/like`, { replyID });
     getLikes();
   };

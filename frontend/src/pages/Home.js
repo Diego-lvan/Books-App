@@ -1,17 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "App";
 import axios from "axios";
-import URL from "config";
-import { Link } from "react-router-dom";
-import { fetchBooks } from "utils/books";
+import Books from "utils/books";
 import BookCard from "../components/books/BookCard";
 axios.defaults.withCredentials = true;
 const Home = () => {
-  const { logged, setLogged, loading, setLoading } = useContext(AppContext);
+  const { loading, setLoading } = useContext(AppContext);
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetchBooks(setBooks, setLoading);
+    Books.fetchBooks(setBooks, setLoading);
   }, []);
 
   if (loading) return <h1>Loading</h1>;

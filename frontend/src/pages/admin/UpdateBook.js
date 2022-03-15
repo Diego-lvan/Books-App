@@ -3,7 +3,7 @@ import BookForm from "components/books/BookForm";
 import axios from "axios";
 import URL from "config";
 import { AppContext } from "App";
-import { fetchBook, fetchBooks } from "utils/books";
+import book from "utils/books";
 axios.defaults.withCredentials = true;
 const config = { headers: { "Content-Type": "multipart/form-data" } };
 const UpdateBook = () => {
@@ -31,12 +31,12 @@ const UpdateBook = () => {
   };
 
   useEffect(() => {
-    fetchBooks(setBooks, setLoading);
+    book.fetchBooks(setBooks, setLoading);
     // fetchBook()
   }, []);
   //fetch the book to modify
   useEffect(() => {
-    fetchBook(isbnBookUpdate, setCurrentBook);
+    book.fetchBook(isbnBookUpdate, setCurrentBook);
   }, [isbnBookUpdate]);
 
   //display the book to modify
