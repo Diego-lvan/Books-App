@@ -1,4 +1,6 @@
 const bookRouter = require("express").Router();
+const isLogged = require("../middlewares/isLogged");
+const isAdmin = require("../middlewares/isAdmin");
 const {
   addBook,
   getAllBooks,
@@ -10,23 +12,23 @@ const {
 const upload = require("../middlewares/uploadFile");
 // post book
 
-bookRouter.post("/book/add", upload.single("bookCover"), addBook);
+bookRouter.post("/book/add", isAdmin, upload.single("bookCover"), addBook);
 
 //get all books
-bookRouter.get("/books", getAllBooks);
+bookRouter.get("/books", isLogged, getAllBooks);
 
 //get by categorie
-bookRouter.get("/book/category/:id", getByStatus);
+bookRouter.get("/book/category/:id", isLogged, getByStatus);
 
 // get by isbn
-bookRouter.get("/book/:isbn", getByISBN);
+bookRouter.get("/book/:isbn", isLogged, getByISBN);
 
 //remove
 
 //update
-bookRouter.put("/book", upload.single("bookCover"), updateBook);
+bookRouter.put("/book", isAdmin, upload.single("bookCover"), updateBook);
 
 //get average score
-bookRouter.get("/book/score/:isbn", getAverageScore);
+bookRouter.get("/book/score/:isbn", isLogged, getAverageScore);
 
 module.exports = bookRouter;

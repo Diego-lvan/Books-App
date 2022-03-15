@@ -1,10 +1,13 @@
 const categoryRouter = require("express").Router();
 const { addCategory, getCategories } = require("../controllers/category");
+const isAdmin = require("../middlewares/isAdmin");
+const isLogged = require("../middlewares/isLogged");
 // add new category
-categoryRouter.post("/category", /*Verify is an admin*/ [addCategory]);
+categoryRouter.post("/category", [isAdmin, addCategory]);
 
 // get all  categories
-categoryRouter.get("/category", getCategories);
+categoryRouter.get("/category", isLogged, getCategories);
+
 //update category
 
 module.exports = categoryRouter;
