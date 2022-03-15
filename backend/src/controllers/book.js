@@ -85,4 +85,13 @@ const updateBook = async (req, res) => {
   }
 };
 
-module.exports = { addBook, getAllBooks, getByISBN, getByStatus, updateBook };
+const getAverageScore = async (req, res) => {
+  const { isbn } = req.params;
+  const sql = "SELECT AVG(score) AS averageScore FROM my_books WHERE isbn = ?;";
+  const [{ averageScore }] = await query(sql, [isbn]);
+
+  console.log(averageScore);
+  res.json({ averageScore: averageScore?.toFixed(1) });
+};
+
+module.exports = { addBook, getAllBooks, getByISBN, getByStatus, updateBook, getAverageScore };

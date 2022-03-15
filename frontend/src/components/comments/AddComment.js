@@ -8,6 +8,7 @@ const AddComment = ({ setComments, buttonText, comment, setComment }) => {
   const { isbn } = useParams();
   return (
     <div>
+      <h3>Comments</h3>
       <div className="comment-input">
         <Form.Group className="mb-3 col-xl-4 col-md-8 col-sm-10">
           <Form.Control

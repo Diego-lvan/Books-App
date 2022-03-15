@@ -20,6 +20,10 @@ class Book {
     setBooks(res.data.books);
     setLoading(false);
   }
+  async getAverageScore(isbn, setAverageScore) {
+    const res = await axios.get(`${URL}book/score/${isbn}`);
+    setAverageScore(res.data.averageScore);
+  }
 }
 
 export default new Book();

@@ -20,10 +20,12 @@ const BookPage = () => {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [score, setScore] = useState("");
+  const [averageScore, setAverageScore] = useState(null);
 
   useEffect(() => {
     FetchCommets.getComments(isbn, setComments);
     books.fetchBook(isbn, setBook, setLoading);
+    books.getAverageScore(isbn, setAverageScore);
     Status.getAllstatus(setStatus);
     MyBooks.fetchMyBooksStatus(setStatusSelected, isbn);
     MyBooks.getRate(isbn, setScore);
@@ -34,9 +36,13 @@ const BookPage = () => {
   }, [statusSelected]);
 
   useEffect(() => {
-    MyBooks.rateBook(isbn, score);
+    handleRateBook();
   }, [score]);
 
+  const handleRateBook = async () => {
+    await MyBooks.rateBook(isbn, score);
+    await books.getAverageScore(isbn, setAverageScore);
+  };
   if (!book || loading) return <div></div>;
 
   return (
@@ -48,6 +54,7 @@ const BookPage = () => {
         statusSelected={statusSelected}
         score={score}
         setScore={setScore}
+        averageScore={averageScore}
       />
       <AddComment
         setComments={setComments}

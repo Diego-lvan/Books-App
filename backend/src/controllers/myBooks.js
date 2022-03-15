@@ -50,7 +50,7 @@ const getScore = async (req, res) => {
   const { userID } = req.user;
   const sql = "SELECT score FROM my_books WHERE isbn = ? AND user_id = ? ";
   const score = await query(sql, [isbn, userID]);
-  res.json({ score: score[0].score });
+  res.json({ score: score[0]?.score });
 };
 
 module.exports = { addMyBook, getMyBooks, deleteMyBook, rateBook, getScore };

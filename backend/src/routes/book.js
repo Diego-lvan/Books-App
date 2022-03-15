@@ -5,6 +5,7 @@ const {
   getByISBN,
   getByStatus,
   updateBook,
+  getAverageScore,
 } = require("../controllers/book");
 const upload = require("../middlewares/uploadFile");
 // post book
@@ -24,5 +25,8 @@ bookRouter.get("/book/:isbn", getByISBN);
 
 //update
 bookRouter.put("/book", upload.single("bookCover"), updateBook);
+
+//get average score
+bookRouter.get("/book/score/:isbn", getAverageScore);
 
 module.exports = bookRouter;

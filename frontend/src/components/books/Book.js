@@ -5,7 +5,15 @@ import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import defaultImg from "assets/img/not-found.png";
 axios.defaults.withCredentials = true;
-const Book = ({ book, status, setStatusSelected, statusSelected, score, setScore }) => {
+const Book = ({
+  book,
+  status,
+  setStatusSelected,
+  statusSelected,
+  score,
+  setScore,
+  averageScore,
+}) => {
   const scoreValues = [1, 2, 3, 4, 5];
 
   return (
@@ -24,6 +32,8 @@ const Book = ({ book, status, setStatusSelected, statusSelected, score, setScore
             }}
           />
           <h5 style={{ margin: "18px 0" }}>{book.no_pages} Pages</h5>
+          <h5 style={{ margin: "18px 0" }}>Score: {averageScore} </h5>
+
           <Form.Group className="mb-3 col-xl-8 col-md-4 col-sm-6 col-4">
             <Form.Select
               type="text"

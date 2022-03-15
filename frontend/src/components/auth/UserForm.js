@@ -21,7 +21,7 @@ const UserForm = ({
   const { logged } = useContext(AppContext);
   console.log(logged.img);
   return (
-    <div style={{ marginTop: "60px" }}>
+    <div style={{ margin: "60px", display: "grid" }}>
       <h2 style={{ marginBottom: "20px" }}>{title}</h2>
 
       {/* Form in account */}
