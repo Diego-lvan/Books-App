@@ -1,5 +1,4 @@
 const { query } = require("../config/conn");
-const { verifyLength, isNotEmpty } = require("../helpers/checkFields");
 const addBook = async (req, res, next) => {
   const { isbn, title, noPages, author, synopsis, categoryID } = req.body;
   if (!isbn || !title || !noPages || !author || !synopsis || !categoryID)
@@ -89,8 +88,6 @@ const getAverageScore = async (req, res) => {
   const { isbn } = req.params;
   const sql = "SELECT AVG(score) AS averageScore FROM my_books WHERE isbn = ?;";
   const [{ averageScore }] = await query(sql, [isbn]);
-
-  console.log(averageScore);
   res.json({ averageScore: averageScore?.toFixed(1) });
 };
 

@@ -1,6 +1,5 @@
 import axios from "axios";
 import URL from "config";
-import Books from "./books";
 
 axios.defaults.withCredentials = true;
 class MyBoks {
@@ -24,7 +23,7 @@ class MyBoks {
   }
   async rateBook(isbn, score) {
     if (!score) return;
-    const res = await axios.post(`${URL}my-books/rate`, { score, isbn });
+    await axios.post(`${URL}my-books/rate`, { score, isbn });
   }
   async getRate(isbn, setScore) {
     const res = await axios.get(`${URL}my-books/score/${isbn}`);

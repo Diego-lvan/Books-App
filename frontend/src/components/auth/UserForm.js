@@ -1,9 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AppContext } from "App";
-import { Navigate } from "react-router-dom";
 import userDefault from "assets/img/user.png";
 import URL from "config";
 const UserForm = ({

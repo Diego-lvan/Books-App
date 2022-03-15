@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
-import { addReply } from "utils/reply";
 import Comments from "utils/comments";
 const AddComment = ({ setComments, buttonText, comment, setComment }) => {
   const { isbn } = useParams();

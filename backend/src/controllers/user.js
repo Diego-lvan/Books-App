@@ -1,5 +1,4 @@
 const { query } = require("../config/conn");
-const { promisify } = require("util");
 const bcrypt = require("bcrypt");
 
 const addUser = async (req, res, next) => {
