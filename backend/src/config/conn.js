@@ -1,8 +1,8 @@
 const mysql = require("mysql");
-const { dbPwd, dbUser } = require("./config.js");
+const { dbPwd, dbUser, dbHost } = require("./config.js");
 const util = require("util");
 const conn = mysql.createPool({
-  host: `127.0.0.1`,
+  host: dbHost,
   user: dbUser,
   password: dbPwd,
   database: "uniread",

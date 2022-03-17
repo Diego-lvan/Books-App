@@ -1,8 +1,7 @@
 const isAdmin = (req, res, next) => {
-  if (res?.user?.isAdmin) {
-    next();
+  if (req?.user?.isAdmin === 1) {
+    return next();
   }
-  console.log("is not admin");
   res.json({ success: false, msg: "unauthorized" });
 };
 

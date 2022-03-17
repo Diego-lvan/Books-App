@@ -1,8 +1,7 @@
 const isLogged = (req, res, next) => {
   if (req.user) {
-    next();
+    return next();
   }
-  console.log("is not logged ");
   res.json({ success: false, msg: "unauthorized" });
 };
 

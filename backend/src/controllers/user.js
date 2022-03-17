@@ -1,10 +1,10 @@
 const { query } = require("../config/conn");
 const bcrypt = require("bcrypt");
-
+const verifyLength = require("../utils/verifyLength");
 const addUser = async (req, res, next) => {
   const { email, pwd, user } = req.body;
 
-  if (!email || !pwd || !user || email.length > 50 || user.length > 20) {
+  if (verifyLength({ email }, { user }) || !pwd) {
     return res.json({ sucess: false, status: 400 });
   }
   const sql = "INSERT INTO user (email,password,username) VALUES (?,?,?)";
@@ -23,6 +23,7 @@ const updateUser = async (req, res) => {
     const { filename } = req.file;
     const { userID } = req.user;
     const { email, user } = req.body;
+    if (verifyLength({ email }, { user })) return res.json({ success: false });
     const sql = "UPDATE user SET email = ?, username = ?, user_img = ? WHERE user_id = ?";
     await query(sql, [email, user, filename, userID]);
     res.json({ success: true });
