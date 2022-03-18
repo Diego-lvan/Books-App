@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import URL from "config";
 import axios from "axios";
-import Comments from "utils/comments";
+import Comments from "actions/comments";
 import { AppContext } from "App";
 import userDefault from "assets/img/user.png";
 import CommentButtons from "components/comments/commentButtons";

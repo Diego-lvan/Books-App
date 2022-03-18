@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "App";
 import axios from "axios";
-import Books from "utils/books";
+import Books from "actions/books";
 import BookCard from "../components/books/BookCard";
 axios.defaults.withCredentials = true;
 const Home = () => {

@@ -3,7 +3,7 @@ import BookForm from "components/books/BookForm";
 import axios from "axios";
 import URL from "config";
 import { AppContext } from "App";
-import book from "utils/books";
+import book from "actions/books";
 axios.defaults.withCredentials = true;
 const config = { headers: { "Content-Type": "multipart/form-data" } };
 const UpdateBook = () => {

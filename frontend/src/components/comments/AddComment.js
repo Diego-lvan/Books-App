@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
-import Comments from "utils/comments";
+import Comments from "actions/comments";
 const AddComment = ({ setComments, buttonText, comment, setComment }) => {
   const { isbn } = useParams();
   return (

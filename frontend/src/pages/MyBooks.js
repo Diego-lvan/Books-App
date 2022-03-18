@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import BookCard from "../components/books/BookCard";
-import books from "../utils/books";
+import books from "../actions/books";
 axios.defaults.withCredentials = true;
 const MyBooks = () => {
   const [myBooks, setMyBooks] = useState([]);

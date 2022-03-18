@@ -5,10 +5,10 @@ import { AppContext } from "App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddComment from "components/comments/AddComment";
 import Comments from "components/comments/Comments";
-import Status from "utils/status";
-import MyBooks from "utils/myBooks";
-import FetchCommets from "utils/comments";
-import books from "utils/books";
+import Status from "actions/status";
+import MyBooks from "actions/myBooks";
+import FetchCommets from "actions/comments";
+import books from "actions/books";
 import Book from "components/books/Book";
 axios.defaults.withCredentials = true;
 const BookPage = () => {

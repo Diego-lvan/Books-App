@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Replies from "utils/reply";
+import Replies from "actions/reply";
 const AddComment = ({
   setReplyInput,
   replyInput,
