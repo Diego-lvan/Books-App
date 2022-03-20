@@ -21,7 +21,7 @@ const cors = require("cors");
 app.use(
   cors({
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://uniread.netlify.app"],
     credentials: true,
   })
 );

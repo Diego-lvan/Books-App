@@ -4,6 +4,7 @@ axios.defaults.withCredentials = true;
 class Status {
   async getAllstatus(setStatus) {
     const res = await axios.get(`${URL}status`);
+    console.log(res);
     setStatus(res.data.status);
   }
 

@@ -80,31 +80,3 @@ CREATE TABLE my_books(
     FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
     FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE 
 );
-
-
-
-
-
- SELECT comment.comment_id, comment.user_id, comment.comment, comment.created_date, 
-              comment.likes, comment.amount_replies, user.username 
-              FROM comment INNER JOIN user 
-              ON user.user_id = comment.user_id AND comment.isbn = ? ORDER BY created_date DESC;
-
-SELECT status.status_id, status.status, my_books.score FROM status
-INNER JOIN my_books ON status.status_id = my_books.status_id AND my_books.user_id = 4 AND isbn  = '12324233';
-
-
-
-
-SELECT  user.user_id FROM comments_likes
-    FULL OUTER JOIN user ON user.user_id = comments_likes.user_id AND comments_likes.comment_id = 55;
-
-
-SELECT book.isbn, book.title, book.filename, book.author FROM book INNER JOIN my_books ON my_books.isbn = book.isbn AND my_books.user_id = 4 AND my_books.status_id = 2;
-
-
-
-SELECT replie.replie, replie.replie_id, user.username, user.user_img 
-FROM replie 
-((INNER JOIN user ON user.user_id = replie.user_id)
-(INNER JOIN comment ON comment.comment_id = replie.comment_id AND comment_id = ?);

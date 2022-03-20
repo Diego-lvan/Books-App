@@ -6,6 +6,7 @@ axios.defaults.withCredentials = true;
 class Auth {
   async isAuth(setLogged, setLoading) {
     const res = await axios.get(`${URL}login`);
+    console.log(res);
     if (res.data.user) {
       setLogged(res.data.user);
     } else {
