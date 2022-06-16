@@ -4,3 +4,15 @@ App build using react, express and mysql.Users can rate, comment and add books t
 ## Requirements 
 * Node and npm installed
 * MySQL installed
+
+## Example
+### Home page
+![Home page](https://github.com/Diego-lvan/Books-App/blob/master/example/home.png)
+
+### Book info
+![Book info](https://github.com/Diego-lvan/Books-App/blob/master/example/bookInfo.png)
+
+### Profile
+![Profile](https://github.com/Diego-lvan/Books-App/blob/master/example/profile.png)
+
+
